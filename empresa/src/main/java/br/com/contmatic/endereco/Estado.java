@@ -1,5 +1,8 @@
 package br.com.contmatic.endereco;
 
+/**
+ * @author geovane.santos
+ */
 
 /**
  * The Enum Estado.

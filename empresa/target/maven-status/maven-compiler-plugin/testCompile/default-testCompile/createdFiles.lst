@@ -1,0 +1,14 @@
+br\com\contmatic\fixture\FixtureTelefone.class
+br\com\contmatic\endereco\EnderecoTest.class
+br\com\contmatic\empresa\FuncionarioTest$2.class
+br\com\contmatic\fixture\FixtureEndereco$1.class
+br\com\contmatic\fixture\FixtureTelefone$1.class
+br\com\contmatic\fixture\FixtureEmpresa$1.class
+br\com\contmatic\fixture\FixtureFuncionario$1.class
+br\com\contmatic\fixture\FixtureFuncionario.class
+br\com\contmatic\telefone\TelefoneTest.class
+br\com\contmatic\empresa\EmpresaTest.class
+br\com\contmatic\fixture\FixtureEmpresa.class
+br\com\contmatic\empresa\FuncionarioTest$1.class
+br\com\contmatic\fixture\FixtureEndereco.class
+br\com\contmatic\empresa\FuncionarioTest.class

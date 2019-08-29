@@ -93,7 +93,7 @@ public class TelefoneTest {
 		telefone.setNumero("985191604");
 		assertTrue(isValid(telefone, "O número do telefone está invalido."));
 	}
-	
+
 	@Test
 	public void deve_aceitar_ddd_valido() {
 		Telefone telefone = Fixture.from(Telefone.class).gimme("telefone");
@@ -116,9 +116,6 @@ public class TelefoneTest {
 		for (ConstraintViolation<Telefone> constraintViolation : restricoes)
 			if (constraintViolation.getMessage().equalsIgnoreCase(mensagem))
 				valido = false;
-		for (ConstraintViolation<Telefone> constraintViolation : restricoes)
-			System.out.println(constraintViolation.getMessage());
-
 		return valido;
 	}
 

@@ -18,7 +18,16 @@ import org.hibernate.validator.constraints.NotBlank;
 import br.com.caelum.stella.bean.validation.CNPJ;
 import br.com.contmatic.endereco.Endereco;
 
+/**
+ * @author geovane.santos
+ */
+
+/**
+ * The Class Empresa.
+ */
 public class Empresa {
+
+	/** The nome. */
 	@Size(min = 1, max = 100, message = "O nome da empresa deve ser entre 1 e 100")
 	@NotBlank(message = "O nome da empresa não pode ser nulo.")
 	private String nome;
@@ -35,7 +44,7 @@ public class Empresa {
 
 	/** The endereco. */
 	@NotNull(message = "O endereço da empresa está vazio")
-	@Valid 
+	@Valid
 	private Set<Endereco> enderecos;
 
 	/** The lista funcionario. */
@@ -43,51 +52,112 @@ public class Empresa {
 	@Valid
 	private List<Funcionario> funcionarios;
 
+	/**
+	 * Gets the nome.
+	 *
+	 * @return the nome
+	 */
 	public String getNome() {
 		return nome;
 	}
 
+	/**
+	 * Sets the nome.
+	 *
+	 * @param nome the new nome
+	 */
 	public void setNome(String nome) {
 		this.nome = nome;
 	}
 
+	/**
+	 * Gets the email.
+	 *
+	 * @return the email
+	 */
 	public String getEmail() {
 		return email;
 	}
 
+	/**
+	 * Sets the email.
+	 *
+	 * @param email the new email
+	 */
 	public void setEmail(String email) {
 		this.email = email;
 	}
 
+	/**
+	 * Gets the cnpj.
+	 *
+	 * @return the cnpj
+	 */
 	public String getCnpj() {
 		return cnpj;
 	}
 
+	/**
+	 * Sets the cnpj.
+	 *
+	 * @param cnpj the new cnpj
+	 */
 	public void setCnpj(String cnpj) {
 		this.cnpj = cnpj;
 	}
 
+	/**
+	 * Gets the enderecos.
+	 *
+	 * @return the enderecos
+	 */
 	public Set<Endereco> getEnderecos() {
 		return enderecos;
 	}
 
+	/**
+	 * Sets the enderecos.
+	 *
+	 * @param enderecos the new enderecos
+	 */
 	public void setEnderecos(Set<Endereco> enderecos) {
 		this.enderecos = enderecos;
 	}
 
+	/**
+	 * Gets the funcionarios.
+	 *
+	 * @return the funcionarios
+	 */
 	public List<Funcionario> getFuncionarios() {
 		return funcionarios;
 	}
 
+	/**
+	 * Sets the funcionarios.
+	 *
+	 * @param funcionarios the new funcionarios
+	 */
 	public void setFuncionarios(List<Funcionario> funcionarios) {
 		this.funcionarios = funcionarios;
 	}
 
+	/**
+	 * Hash code.
+	 *
+	 * @return the int
+	 */
 	@Override
 	public int hashCode() {
 		return new HashCodeBuilder().append(this.cnpj).toHashCode();
 	}
 
+	/**
+	 * Equals.
+	 *
+	 * @param obj the obj
+	 * @return true, if successful
+	 */
 	@Override
 	public boolean equals(Object obj) {
 		if (obj == null) {
@@ -103,6 +173,11 @@ public class Empresa {
 		return new EqualsBuilder().append(this.cnpj, empresa.getCnpj()).isEquals();
 	}
 
+	/**
+	 * To string.
+	 *
+	 * @return the string
+	 */
 	@Override
 	public String toString() {
 		return ToStringBuilder.reflectionToString(this, JSON_STYLE);

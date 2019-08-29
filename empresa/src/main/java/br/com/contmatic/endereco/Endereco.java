@@ -13,6 +13,10 @@ import org.apache.commons.lang3.builder.HashCodeBuilder;
 import org.apache.commons.lang3.builder.ToStringBuilder;
 
 /**
+ * @author geovane.santos
+ */
+
+/**
  * The Class Endereco.
  */
 public class Endereco {
@@ -42,17 +46,6 @@ public class Endereco {
 	/** The estado. */
 	@NotNull(message = "O estado não pode ser nulo.")
 	private Estado estado;
-
-	/**
-	 * Instantiates a new endereco.
-	 *
-	 * @param nome   the nome
-	 * @param bairro the bairro
-	 * @param cidade the cidade
-	 * @param cep    the cep
-	 * @param numero the numero
-	 * @param estado the estado
-	 */
 
 	/**
 	 * To string.

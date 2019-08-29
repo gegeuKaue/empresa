@@ -1,4 +1,4 @@
 -------------------------------------------------------------------------------
-Test set: br.com.contmatic.empresa.FuncionarioTest
+Test set: br.com.contmatic.endereco.EnderecoTest
 -------------------------------------------------------------------------------
-Tests run: 21, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.093 sec
+Tests run: 18, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.047 sec

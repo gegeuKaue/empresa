@@ -193,7 +193,6 @@ public class EmpresaTest {
 		for (ConstraintViolation<Empresa> constraintViolation : restricoes)
 			if (constraintViolation.getMessage().equalsIgnoreCase(mensagem))
 				valido = false;
-
 		return valido;
 	}
 }

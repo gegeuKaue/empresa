@@ -157,9 +157,6 @@ public class EnderecoTest {
 		for (ConstraintViolation<Endereco> constraintViolation : restricoes)
 			if (constraintViolation.getMessage().equalsIgnoreCase(mensagem))
 				valido = false;
-		for (ConstraintViolation<Endereco> constraintViolation : restricoes) {
-			System.out.println(constraintViolation.getMessage());
-		}
 		return valido;
 	}
 }
