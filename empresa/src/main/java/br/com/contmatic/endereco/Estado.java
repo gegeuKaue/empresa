@@ -25,10 +25,10 @@ public enum Estado {
 	CE("Ceará"),
 
 	/** The df. */
-	DF("DistritoFederal"),
+	DF("Distrito Federal"),
 
 	/** The es. */
-	ES("EspíritoSanto"),
+	ES("Espírito Santo"),
 
 	/** The go. */
 	GO("Goiás"),
@@ -37,13 +37,13 @@ public enum Estado {
 	MA("Maranhão"),
 
 	/** The mt. */
-	MT("MatoGrosso"),
+	MT("Mato Grosso"),
 
 	/** The ms. */
-	MS("MatoGrossodoSul"),
+	MS("Mato Grosso do Sul"),
 
 	/** The mg. */
-	MG("MinasGerais"),
+	MG("Minas Gerais"),
 
 	/** The pa. */
 	PA("Pará"),
@@ -61,13 +61,13 @@ public enum Estado {
 	PI("Piauí"),
 
 	/** The rj. */
-	RJ("RiodeJaneiro"),
+	RJ("Rio de Janeiro"),
 
 	/** The rn. */
-	RN("RioGrandedoNorte"),
+	RN("Rio Grande do Norte"),
 
 	/** The rs. */
-	RS("RioGrandedoSul"),
+	RS("Rio Grande do Sul"),
 
 	/** The ro. */
 	RO("Rondônia"),
@@ -76,10 +76,10 @@ public enum Estado {
 	RR("Roraima"),
 
 	/** The sc. */
-	SC("SantaCatarina"),
+	SC("Santa Catarina"),
 
 	/** The sp. */
-	SP("SãoPaulo"),
+	SP("São Paulo"),
 
 	/** The se. */
 	SE("Sergipe"),

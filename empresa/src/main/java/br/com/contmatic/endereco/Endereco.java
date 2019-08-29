@@ -1,8 +1,9 @@
 package br.com.contmatic.endereco;
 
+import static org.apache.commons.lang3.builder.ToStringStyle.JSON_STYLE;
+
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
 
@@ -10,8 +11,6 @@ import org.apache.commons.lang3.builder.EqualsBuilder;
 import org.apache.commons.lang3.builder.HashCodeBuilder;
 import org.apache.commons.lang3.builder.ToStringBuilder;
 
-
-// TODO: Auto-generated Javadoc
 /**
  * The Class Endereco.
  */
@@ -39,7 +38,7 @@ public class Endereco {
 	private int numero;
 
 	/** The estado. */
-	@NotNull(message =  "O estado não pode ser nulo.")
+	@NotNull(message = "O estado não pode ser nulo.")
 	private Estado estado;
 
 	/**
@@ -52,19 +51,6 @@ public class Endereco {
 	 * @param numero the numero
 	 * @param estado the estado
 	 */
-	public Endereco(@NotEmpty(message = "O nome não pode ser vazio.") String nome,
-			@NotEmpty(message = "O nome do bairro não pode ser vázio.") String bairro,
-			@NotEmpty(message = "O nome da cidade não deve ser vázio.") String cidade,
-			@NotEmpty(message = "O CEP não pode está vázio.") String cep,
-			@Min(value = -1, message = "O número não deve ser negativo.") int numero, Estado estado) {
-
-		this.nome = nome;
-		this.bairro = bairro;
-		this.cidade = cidade;
-		this.cep = cep;
-		this.numero = numero;
-		this.estado = estado;
-	}
 
 	/**
 	 * To string.
@@ -73,7 +59,7 @@ public class Endereco {
 	 */
 	@Override
 	public String toString() {
-		return ToStringBuilder.reflectionToString(this);
+		return ToStringBuilder.reflectionToString(this, JSON_STYLE);
 	}
 
 	/**
@@ -204,5 +190,5 @@ public class Endereco {
 	public void setNumero(int numero) {
 		this.numero = numero;
 	}
-
+	
 }
