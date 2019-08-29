@@ -5,37 +5,43 @@ import static org.apache.commons.lang3.builder.ToStringStyle.JSON_STYLE;
 import java.util.List;
 import java.util.Set;
 
-import javax.validation.constraints.Email;
-import javax.validation.constraints.NotBlank;
+import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 
 import org.apache.commons.lang3.builder.EqualsBuilder;
 import org.apache.commons.lang3.builder.HashCodeBuilder;
 import org.apache.commons.lang3.builder.ToStringBuilder;
+import org.hibernate.validator.constraints.Email;
+import org.hibernate.validator.constraints.NotBlank;
 
 import br.com.caelum.stella.bean.validation.CNPJ;
 import br.com.contmatic.endereco.Endereco;
 
 public class Empresa {
-
+	@Size(min = 1, max = 100, message = "O nome da empresa deve ser entre 1 e 100")
 	@NotBlank(message = "O nome da empresa não pode ser nulo.")
 	private String nome;
 
 	/** The email. */
+	@NotBlank(message = "O email da empresa não pode ser nulo")
 	@Email(message = "O email da empresa está inválido")
 	private String email;
 
 	/** The cnpj. */
+	@NotBlank(message = "O cnpj não pode ser nulo")
 	@CNPJ(message = "O CNPJ da empresa está invalido")
 	private String cnpj;
 
 	/** The endereco. */
 	@NotNull(message = "O endereço da empresa está vazio")
+	@Valid 
 	private Set<Endereco> enderecos;
 
 	/** The lista funcionario. */
-	@NotNull(message = "Os funcinarios da empresa está nulo;")
-	private List<Funcionario> listaFuncionario;
+	@NotNull(message = "Os funcionários da empresa está nulo.")
+	@Valid
+	private List<Funcionario> funcionarios;
 
 	public String getNome() {
 		return nome;
@@ -69,12 +75,12 @@ public class Empresa {
 		this.enderecos = enderecos;
 	}
 
-	public List<Funcionario> getListaFuncionario() {
-		return listaFuncionario;
+	public List<Funcionario> getFuncionarios() {
+		return funcionarios;
 	}
 
-	public void setListaFuncionario(List<Funcionario> listaFuncionario) {
-		this.listaFuncionario = listaFuncionario;
+	public void setFuncionarios(List<Funcionario> funcionarios) {
+		this.funcionarios = funcionarios;
 	}
 
 	@Override

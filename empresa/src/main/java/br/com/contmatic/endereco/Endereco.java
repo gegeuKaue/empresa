@@ -3,9 +3,10 @@ package br.com.contmatic.endereco;
 import static org.apache.commons.lang3.builder.ToStringStyle.JSON_STYLE;
 
 import javax.validation.constraints.Min;
-import javax.validation.constraints.NotBlank;
+import org.hibernate.validator.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
+import javax.validation.constraints.Size;
 
 import org.apache.commons.lang3.builder.EqualsBuilder;
 import org.apache.commons.lang3.builder.HashCodeBuilder;
@@ -30,6 +31,7 @@ public class Endereco {
 
 	/** The cep. */
 	@NotBlank(message = "O CEP não pode está vázio.")
+	@Size(min = 8, max = 8, message = "O CEP deve ter 8 digitos.")
 	@Pattern(regexp = "\\d+", message = "Digite um cep valido")
 	private String cep;
 
@@ -190,5 +192,5 @@ public class Endereco {
 	public void setNumero(int numero) {
 		this.numero = numero;
 	}
-	
+
 }

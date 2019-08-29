@@ -30,7 +30,7 @@ public class FixtureEmpresa {
 				funcionarios.add((Funcionario)Fixture.from(Funcionario.class).gimme("funcionario"));
 				funcionarios.add((Funcionario)Fixture.from(Funcionario.class).gimme("funcionario"));
 				funcionarios.add((Funcionario)Fixture.from(Funcionario.class).gimme("funcionario"));
-				add("listaFuncionario", funcionarios);
+				add("funcionarios", funcionarios);
 			}
 		});
 	}
