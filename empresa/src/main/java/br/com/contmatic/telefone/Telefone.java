@@ -95,6 +95,5 @@ public class Telefone {
 	@Override
 	public String toString() {
 		return ToStringBuilder.reflectionToString(this, JSON_STYLE);
-
 	}
 }

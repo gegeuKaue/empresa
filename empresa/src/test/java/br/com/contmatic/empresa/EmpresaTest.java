@@ -3,6 +3,7 @@ package br.com.contmatic.empresa;
 import static com.google.code.beanmatchers.BeanMatchers.hasValidBeanEqualsFor;
 import static com.google.code.beanmatchers.BeanMatchers.hasValidBeanHashCodeFor;
 import static com.google.code.beanmatchers.BeanMatchers.hasValidGettersAndSetters;
+import static org.hamcrest.CoreMatchers.containsString;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertThat;
 import static org.junit.Assert.assertTrue;
@@ -186,6 +187,31 @@ public class EmpresaTest {
 		assertTrue(isValid(empresa, "O nome do bairro não pode ser vázio."));
 	}
 
+	@Test
+	public void deve_conter_o_valor_nome_no_toString() {
+		assertThat(new Empresa().toString(), containsString("nome"));
+	}
+	
+	@Test
+	public void deve_conter_o_valor_email_no_toString() {
+		assertThat(new Empresa().toString(), containsString("email"));
+	}
+	
+	@Test
+	public void deve_conter_o_valor_cnpj_no_toString() {
+		assertThat(new Empresa().toString(), containsString("cnpj"));
+	}
+	
+	@Test
+	public void deve_conter_o_valor_funcionarios_no_toString() {
+		assertThat(new Empresa().toString(), containsString("funcionarios"));
+	}
+	
+	@Test
+	public void deve_conter_o_valor_enderecos_no_toString() {
+		assertThat(new Empresa().toString(), containsString("enderecos"));
+	}
+	
 	public boolean isValid(Empresa empresa, String mensagem) {
 		validator = factory.getValidator();
 		boolean valido = true;

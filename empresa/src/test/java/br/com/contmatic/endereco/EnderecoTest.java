@@ -1,6 +1,7 @@
 package br.com.contmatic.endereco;
 
 import static com.google.code.beanmatchers.BeanMatchers.hasValidGettersAndSetters;
+import static org.hamcrest.CoreMatchers.containsString;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertThat;
 import static org.junit.Assert.assertTrue;
@@ -148,6 +149,36 @@ public class EnderecoTest {
 		Endereco endereco = Fixture.from(CLASSE).gimme("endereco");
 		endereco.setEstado(null);
 		assertFalse(isValid(endereco, "O estado não pode ser nulo."));
+	}
+
+	@Test
+	public void deve_conter_o_valor_nome_no_toString() {
+		assertThat(new Endereco().toString(), containsString("nome"));
+	}
+
+	@Test
+	public void deve_conter_o_valor_bairro_no_toString() {
+		assertThat(new Endereco().toString(), containsString("bairro"));
+	}
+
+	@Test
+	public void deve_conter_o_valor_cidade_no_toString() {
+		assertThat(new Endereco().toString(), containsString("cidade"));
+	}
+
+	@Test
+	public void deve_conter_o_valor_cep_no_toString() {
+		assertThat(new Endereco().toString(), containsString("cep"));
+	}
+
+	@Test
+	public void deve_conter_o_numero_no_toString() {
+		assertThat(new Endereco().toString(), containsString("numero"));
+	}
+
+	@Test
+	public void deve_conter_o_estado_no_toString() {
+		assertThat(new Endereco().toString(), containsString("estado"));
 	}
 
 	public boolean isValid(Endereco endereco, String mensagem) {

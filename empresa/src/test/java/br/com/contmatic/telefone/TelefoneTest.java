@@ -1,6 +1,7 @@
 package br.com.contmatic.telefone;
 
 import static com.google.code.beanmatchers.BeanMatchers.hasValidGettersAndSetters;
+import static org.hamcrest.CoreMatchers.containsString;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertThat;
 import static org.junit.Assert.assertTrue;
@@ -106,6 +107,16 @@ public class TelefoneTest {
 		Telefone telefone = Fixture.from(Telefone.class).gimme("telefone");
 		telefone.setDdd(null);
 		assertFalse(isValid(telefone, "O ddd do telefone não pode ser vazio."));
+	}
+
+	@Test
+	public void deve_conter_o_valor_ddd_no_toString() {
+		assertThat(new Telefone().toString(), containsString("ddd"));
+	}
+	
+	@Test
+	public void deve_conter_o_valor_numero_no_toString() {
+		assertThat(new Telefone().toString(), containsString("numero"));
 	}
 
 	public boolean isValid(Telefone telefone, String mensagem) {
