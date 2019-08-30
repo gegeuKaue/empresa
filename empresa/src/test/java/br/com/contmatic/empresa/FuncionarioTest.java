@@ -38,7 +38,7 @@ public class FuncionarioTest {
 
 	@BeforeClass
 	public static void setUp() {
-		beanMatcherData();
+		reconhecerJodaTime();
 		FixtureFuncionario.fixture();
 	}
 
@@ -60,20 +60,6 @@ public class FuncionarioTest {
 	@Test
 	public void deve_respeitar_equals() {
 		assertThat(CLASSE, hasValidBeanEqualsFor("cpf"));
-	}
-
-	public static void beanMatcherData() {
-		BeanMatchers.registerValueGenerator(new ValueGenerator<LocalTime>() {
-			public LocalTime generate() {
-				return LocalTime.now();
-			}
-		}, LocalTime.class);
-
-		BeanMatchers.registerValueGenerator(new ValueGenerator<LocalDate>() {
-			public LocalDate generate() {
-				return LocalDate.now();
-			}
-		}, LocalDate.class);
 	}
 
 	@Test
@@ -196,7 +182,6 @@ public class FuncionarioTest {
 
 	@Test
 	public void nao_deve_aceitar_email_invalido() {
-
 		funcionario.setEmail("aaaa@aaaaaa");
 		assertFalse(isValid(funcionario, "O email do funcionario está invalido."));
 	}
@@ -260,5 +245,19 @@ public class FuncionarioTest {
 			if (constraintViolation.getMessage().equalsIgnoreCase(mensagem))
 				valido = false;
 		return valido;
+	}
+
+	public static void reconhecerJodaTime() {
+		BeanMatchers.registerValueGenerator(new ValueGenerator<LocalTime>() {
+			public LocalTime generate() {
+				return LocalTime.now();
+			}
+		}, LocalTime.class);
+
+		BeanMatchers.registerValueGenerator(new ValueGenerator<LocalDate>() {
+			public LocalDate generate() {
+				return LocalDate.now();
+			}
+		}, LocalDate.class);
 	}
 }

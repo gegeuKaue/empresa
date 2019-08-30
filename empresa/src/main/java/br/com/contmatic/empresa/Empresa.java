@@ -19,13 +19,6 @@ import org.hibernate.validator.constraints.NotBlank;
 import br.com.caelum.stella.bean.validation.CNPJ;
 import br.com.contmatic.endereco.Endereco;
 
-// TODO: Auto-generated Javadoc
-/**
- * The Class Empresa.
- *
- * @author geovane.santos
- */
-
 /**
  * The Class Empresa.
  */

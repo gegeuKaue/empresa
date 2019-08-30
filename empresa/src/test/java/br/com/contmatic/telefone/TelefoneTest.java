@@ -55,63 +55,54 @@ public class TelefoneTest {
 
 	@Test
 	public void nao_deve_aceitar_numero_que_nao_comeca_com_9() {
-
 		telefone.setNumero("788519106");
 		assertFalse(isValid(telefone, "O número do telefone está invalido."));
 	}
 
 	@Test
 	public void nao_deve_aceitar_numero_com_letra() {
-
 		telefone.setNumero("9g8519106");
 		assertFalse(isValid(telefone, "O número do telefone está invalido."));
 	}
 
 	@Test
 	public void nao_deve_aceitar_numero_vazio() {
-
 		telefone.setNumero("");
 		assertFalse(isValid(telefone, "O número do telefone não pode ser vazio."));
 	}
 
 	@Test
 	public void nao_deve_aceitar_numero_null() {
-
 		telefone.setNumero(null);
 		assertFalse(isValid(telefone, "O número do telefone não pode ser vazio."));
 	}
 
 	@Test
 	public void nao_deve_aceitar_numero_numeros_com_menos_de_9_numero() {
-
 		telefone.setNumero("985");
 		assertFalse(isValid(telefone, "O número do telefone tem que ter 9 numeros"));
 	}
 
 	@Test
 	public void nao_deve_aceitar_numero_numeros_com_mais_de_9_numero() {
-
 		telefone.setNumero("98599999999999999999999");
 		assertFalse(isValid(telefone, "O número do telefone tem que ter 9 numeros"));
 	}
 
 	@Test
 	public void deve_aceitar_numero_valido() {
-
 		telefone.setNumero("985191604");
 		assertTrue(isValid(telefone, "O número do telefone está invalido."));
 	}
 
 	@Test
 	public void deve_aceitar_ddd_valido() {
-
 		telefone.setDdd(TelefoneDDD.DDD11);
 		assertTrue(isValid(telefone, "O ddd do telefone não pode ser vazio."));
 	}
 
 	@Test
 	public void nao_deve_aceitar_ddd_vazio() {
-
 		telefone.setDdd(null);
 		assertFalse(isValid(telefone, "O ddd do telefone não pode ser vazio."));
 	}
@@ -127,7 +118,6 @@ public class TelefoneTest {
 	}
 
 	public boolean isValid(Telefone telefone, String mensagem) {
-
 		validator = factory.getValidator();
 		boolean valido = true;
 		Set<ConstraintViolation<Telefone>> restricoes = validator.validate(telefone);
