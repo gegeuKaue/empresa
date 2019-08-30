@@ -228,8 +228,8 @@ public class FuncionarioTest {
 	}
 
 	@Test
-	public void deve_conter_o_valor_telefones_no_toString() {
-		assertThat(new Funcionario().toString(), containsString("telefones"));
+	public void deve_conter_o_valor_s_no_toString() {
+		assertThat(new Funcionario().toString(), containsString("s"));
 	}
 
 	@Test

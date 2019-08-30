@@ -48,16 +48,6 @@ public class Endereco {
 	private Estado estado;
 
 	/**
-	 * To string.
-	 *
-	 * @return the string
-	 */
-	@Override
-	public String toString() {
-		return ToStringBuilder.reflectionToString(this, JSON_STYLE);
-	}
-
-	/**
 	 * Gets the estado.
 	 *
 	 * @return the estado
@@ -73,27 +63,6 @@ public class Endereco {
 	 */
 	public void setEstado(Estado estado) {
 		this.estado = estado;
-	}
-
-	/**
-	 * Hash code.
-	 *
-	 * @return the int
-	 */
-	@Override
-	public int hashCode() {
-		return HashCodeBuilder.reflectionHashCode(this);
-	}
-
-	/**
-	 * Equals.
-	 *
-	 * @param obj the obj
-	 * @return true, if successful
-	 */
-	@Override
-	public boolean equals(Object obj) {
-		return EqualsBuilder.reflectionEquals(this, obj);
 	}
 
 	/**
@@ -186,4 +155,34 @@ public class Endereco {
 		this.numero = numero;
 	}
 
+	/**
+	 * Hash code.
+	 *
+	 * @return the int
+	 */
+	@Override
+	public int hashCode() {
+		return HashCodeBuilder.reflectionHashCode(this);
+	}
+
+	/**
+	 * Equals.
+	 *
+	 * @param obj the obj
+	 * @return true, if successful
+	 */
+	@Override
+	public boolean equals(Object obj) {
+		return EqualsBuilder.reflectionEquals(this, obj);
+	}
+
+	/**
+	 * To string.
+	 *
+	 * @return the string
+	 */
+	@Override
+	public String toString() {
+		return ToStringBuilder.reflectionToString(this, JSON_STYLE);
+	}
 }

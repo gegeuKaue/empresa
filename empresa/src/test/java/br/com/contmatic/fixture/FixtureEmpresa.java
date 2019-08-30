@@ -8,6 +8,7 @@ import java.util.Set;
 import br.com.contmatic.empresa.Empresa;
 import br.com.contmatic.empresa.Funcionario;
 import br.com.contmatic.endereco.Endereco;
+import br.com.contmatic.telefone.Telefone;
 import br.com.six2six.fixturefactory.Fixture;
 import br.com.six2six.fixturefactory.Rule;
 
@@ -30,9 +31,23 @@ public class FixtureEmpresa {
 				funcionarios.add((Funcionario) Fixture.from(Funcionario.class).gimme("funcionario"));
 				funcionarios.add((Funcionario) Fixture.from(Funcionario.class).gimme("funcionario"));
 				funcionarios.add((Funcionario) Fixture.from(Funcionario.class).gimme("funcionario"));
+				Set<Telefone> telefones = new HashSet<Telefone>();
+				FixtureTelefone.fixture();
+
+				telefones.add((Telefone) Fixture.from(Telefone.class).gimme("telefone"));
+				telefones.add((Telefone) Fixture.from(Telefone.class).gimme("telefone"));
+				telefones.add((Telefone) Fixture.from(Telefone.class).gimme("telefone"));
+				telefones.add((Telefone) Fixture.from(Telefone.class).gimme("telefone"));
+
 				add("funcionarios", funcionarios);
 				add("url", "https://${nome}.com");
 			}
 		});
+	}
+
+	public static void main(String[] args) {
+		fixture();
+		Empresa empresa = Fixture.from(Empresa.class).gimme("empresa");
+		System.out.println(empresa);
 	}
 }

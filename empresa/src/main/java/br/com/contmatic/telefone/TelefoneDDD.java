@@ -1,6 +1,7 @@
 package br.com.contmatic.telefone;
 
 import org.apache.commons.lang3.builder.ToStringBuilder;
+import org.apache.commons.lang3.builder.ToStringStyle;
 
 /**
  * 
@@ -273,7 +274,8 @@ public enum TelefoneDDD {
 	 */
 	@Override
 	public String toString() {
-		return ToStringBuilder.reflectionToString(this);
+		return ToStringBuilder.reflectionToString(this, ToStringStyle.JSON_STYLE);
 	}
 
+	
 }

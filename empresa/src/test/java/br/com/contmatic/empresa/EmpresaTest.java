@@ -24,6 +24,7 @@ import org.junit.Test;
 
 import br.com.contmatic.endereco.Endereco;
 import br.com.contmatic.fixture.FixtureEmpresa;
+import br.com.contmatic.telefone.Telefone;
 import br.com.six2six.fixturefactory.Fixture;
 
 public class EmpresaTest {
@@ -228,6 +229,22 @@ public class EmpresaTest {
 		enderecos.add(endereco);
 		empresa.setEnderecos(enderecos);
 		assertTrue(isValid(empresa, "O nome do bairro não pode ser vázio."));
+	}
+
+	@Test
+	public void nao_deve_aceitar_telefones_nulos() {
+		empresa.setTelefones(null);
+		assertFalse(isValid(empresa, "O telefone da empresa não pode ser nulo"));
+	}
+
+	@Test
+	public void nao_deve_aceitar_telefones_invalidos() {
+		Set<Telefone> telefones = new HashSet<Telefone>();
+		Telefone telefone = Fixture.from(Telefone.class).gimme("telefone");
+		telefone.setNumero("");
+		telefones.add(telefone);
+		empresa.setTelefones(telefones);
+		assertFalse(isValid(empresa, "O número do telefone está invalido."));
 	}
 
 	@Test

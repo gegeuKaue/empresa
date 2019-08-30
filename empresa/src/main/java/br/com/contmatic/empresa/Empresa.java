@@ -18,7 +18,9 @@ import org.hibernate.validator.constraints.NotBlank;
 
 import br.com.caelum.stella.bean.validation.CNPJ;
 import br.com.contmatic.endereco.Endereco;
+import br.com.contmatic.telefone.Telefone;
 
+// TODO: Auto-generated Javadoc
 /**
  * The Class Empresa.
  */
@@ -48,6 +50,11 @@ public class Empresa {
 	@Valid
 	private Set<Endereco> enderecos;
 
+	/** The telefones. */
+	@NotNull(message = "O telefone da empresa não pode ser nulo")
+	@Valid
+	private Set<Telefone> telefones;
+
 	/** The lista funcionario. */
 	@NotNull(message = "Os funcionários da empresa está nulo.")
 	@Valid
@@ -57,6 +64,24 @@ public class Empresa {
 	@NotBlank(message = "A url do site ada empresa não pode ser vazio.")
 	@Pattern(regexp = "^(https?|http|ftp|file)://[-a-zA-Z0-9+&@#/%?=~_|!:,.;]*[-a-zA-Z0-9+&@#/%=~_|]", message = "A url do site da empresa está invalida.")
 	private String url;
+
+	/**
+	 * Gets the telefones.
+	 *
+	 * @return the telefones
+	 */
+	public Set<Telefone> getTelefones() {
+		return telefones;
+	}
+
+	/**
+	 * Sets the telefones.
+	 *
+	 * @param telefones the new telefones
+	 */
+	public void setTelefones(Set<Telefone> telefones) {
+		this.telefones = telefones;
+	}
 
 	/**
 	 * Gets the nome.
