@@ -20,19 +20,19 @@ public class FixtureEmpresa {
 				add("cnpj", random("78434004000175", "41285742000198", "52643314000106", "80861671000186"));
 				FixtureEndereco.fixture();
 				Set<Endereco> enderecos = new HashSet<Endereco>();
-				enderecos.add((Endereco)Fixture.from(Endereco.class).gimme("endereco"));
-				enderecos.add((Endereco)Fixture.from(Endereco.class).gimme("endereco"));
+				enderecos.add((Endereco) Fixture.from(Endereco.class).gimme("endereco"));
+				enderecos.add((Endereco) Fixture.from(Endereco.class).gimme("endereco"));
 				add("enderecos", enderecos);
-				
+
 				FixtureFuncionario.fixture();
 				List<Funcionario> funcionarios = new ArrayList<Funcionario>();
 
-				funcionarios.add((Funcionario)Fixture.from(Funcionario.class).gimme("funcionario"));
-				funcionarios.add((Funcionario)Fixture.from(Funcionario.class).gimme("funcionario"));
-				funcionarios.add((Funcionario)Fixture.from(Funcionario.class).gimme("funcionario"));
+				funcionarios.add((Funcionario) Fixture.from(Funcionario.class).gimme("funcionario"));
+				funcionarios.add((Funcionario) Fixture.from(Funcionario.class).gimme("funcionario"));
+				funcionarios.add((Funcionario) Fixture.from(Funcionario.class).gimme("funcionario"));
 				add("funcionarios", funcionarios);
+				add("url", "https://${nome}.com");
 			}
 		});
 	}
-
 }

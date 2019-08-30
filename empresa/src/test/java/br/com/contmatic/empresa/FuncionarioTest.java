@@ -18,6 +18,7 @@ import javax.validation.ValidatorFactory;
 
 import org.joda.time.LocalDate;
 import org.joda.time.LocalTime;
+import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
@@ -33,11 +34,17 @@ public class FuncionarioTest {
 	private final static Class<Funcionario> CLASSE = Funcionario.class;
 	private Validator validator;
 	private ValidatorFactory factory = Validation.buildDefaultValidatorFactory();
+	private Funcionario funcionario;
 
 	@BeforeClass
 	public static void setUp() {
 		beanMatcherData();
 		FixtureFuncionario.fixture();
+	}
+
+	@Before
+	public void init() {
+		this.funcionario = Fixture.from(Funcionario.class).gimme("funcionario");
 	}
 
 	@Test
@@ -71,112 +78,114 @@ public class FuncionarioTest {
 
 	@Test
 	public void nao_deve_aceitar_nome_nulo() {
-		Funcionario funcionario = Fixture.from(Funcionario.class).gimme("funcionario");
 		funcionario.setNome(null);
 		assertFalse(isValid(funcionario, "O nome do funcionario não deve ser vázio."));
 	}
 
 	@Test
 	public void nao_deve_aceitar_nome_vazio() {
-		Funcionario funcionario = Fixture.from(Funcionario.class).gimme("funcionario");
 		funcionario.setNome("");
 		assertFalse(isValid(funcionario, "O nome do funcionario não deve ser vázio."));
 	}
 
 	@Test
 	public void nao_deve_aceitar_cargo_vazio() {
-		Funcionario funcionario = Fixture.from(Funcionario.class).gimme("funcionario");
 		funcionario.setCargo("");
 		assertFalse(isValid(funcionario, "O cargo do funcionario não deve ser vázio."));
 	}
 
 	@Test
 	public void nao_deve_aceitar_cargo_nulo() {
-		Funcionario funcionario = Fixture.from(Funcionario.class).gimme("funcionario");
 		funcionario.setCargo(null);
 		assertFalse(isValid(funcionario, "O cargo do funcionario não deve ser vázio."));
 	}
 
 	@Test
 	public void nao_deve_aceitar_idade_negativa() {
-		Funcionario funcionario = Fixture.from(Funcionario.class).gimme("funcionario");
 		funcionario.setIdade(-5);
 		assertFalse(isValid(funcionario, "A idade do funcionario não pode ser negativa."));
 	}
 
 	@Test
 	public void nao_deve_aceitar_idade_igual_a_zero() {
-		Funcionario funcionario = Fixture.from(Funcionario.class).gimme("funcionario");
 		funcionario.setIdade(-5);
 		assertFalse(isValid(funcionario, "A idade do funcionario não pode ser negativa."));
 	}
 
 	@Test
 	public void deve_aceitar_idade_valida() {
-		Funcionario funcionario = Fixture.from(Funcionario.class).gimme("funcionario");
 		funcionario.setIdade(5);
 		assertTrue(isValid(funcionario, "A idade do funcionario não pode ser negativa."));
 	}
 
 	@Test
 	public void deve_aceitar_entrada_valida() {
-		Funcionario funcionario = Fixture.from(Funcionario.class).gimme("funcionario");
 		funcionario.setEntrada(null);
 		assertFalse(isValid(funcionario, "O horario de entrada funcionario não pode ser nulo."));
 	}
 
 	@Test
 	public void deve_aceitar_saida_valida() {
-		Funcionario funcionario = Fixture.from(Funcionario.class).gimme("funcionario");
 		funcionario.setSaida(null);
 		assertFalse(isValid(funcionario, "O horario de saida funcionario não pode ser nulo."));
 	}
 
 	@Test
 	public void nao_deve_aceitar_cpf_vazio() {
-		Funcionario funcionario = Fixture.from(Funcionario.class).gimme("funcionario");
 		funcionario.setCpf("");
 		assertFalse(isValid(funcionario, "O cep do funcionario não pode ser nulo."));
 	}
 
 	@Test
 	public void nao_deve_aceitar_cpf_nulo() {
-		Funcionario funcionario = Fixture.from(Funcionario.class).gimme("funcionario");
 		funcionario.setCpf(null);
 		assertFalse(isValid(funcionario, "O cep do funcionario não pode ser nulo."));
 	}
 
 	@Test
 	public void nao_deve_aceitar_cpf_ivalido() {
-		Funcionario funcionario = Fixture.from(Funcionario.class).gimme("funcionario");
 		funcionario.setCpf("47878244064");
 		assertFalse(isValid(funcionario, "O CPF do funcionario está inválido"));
 	}
 
 	@Test
 	public void deve_aceitar_cpf_valido() {
-		Funcionario funcionario = Fixture.from(Funcionario.class).gimme("funcionario");
 		funcionario.setCpf("47878244065");
 		assertTrue(isValid(funcionario, "O CPF do funcionario está inválido"));
 	}
 
 	@Test
+	public void nao_deve_aceitar_dataContratacao_nula() {
+		funcionario.setDataContratacao(null);
+		assertFalse(isValid(funcionario, "A data de contratação do funcionario não deve ser nula"));
+	}
+
+	@Test
+	public void nao_deve_aceitar_dataContratacao_no_futuro() {
+		funcionario.setDataContratacao(new LocalDate(2048, 10, 10));
+		assertFalse(isValid(funcionario, "A data de contratação do funcionario não deve ser maior que a atual"));
+	}
+
+	@Test
+	public void deve_aceitar_dataContratacao_valida() {
+		funcionario.setDataContratacao(new LocalDate(2014, 10, 10));
+		assertTrue(isValid(funcionario, "A data de contratação do funcionario não deve ser maior que a atual"));
+	}
+
+	@Test
 	public void deve_aceitar_cpf_com_letras() {
-		Funcionario funcionario = Fixture.from(Funcionario.class).gimme("funcionario");
 		funcionario.setCpf("478782d4065");
 		assertFalse(isValid(funcionario, "O CPF do funcionario está inválido"));
 	}
 
 	@Test
 	public void nao_deve_aceitar_telefones_nulos() {
-		Funcionario funcionario = Fixture.from(Funcionario.class).gimme("funcionario");
 		funcionario.setTelefones(null);
 		assertFalse(isValid(funcionario, "O telefone do funcionario não pode ser nulo"));
 	}
 
 	@Test
 	public void nao_deve_aceitar_telefones_invalidos() {
-		Funcionario funcionario = Fixture.from(Funcionario.class).gimme("funcionario");
 		Set<Telefone> telefones = new HashSet<Telefone>();
 		Telefone telefone = Fixture.from(Telefone.class).gimme("telefone");
 		telefone.setNumero("");
@@ -187,17 +196,14 @@ public class FuncionarioTest {
 
 	@Test
 	public void nao_deve_aceitar_email_invalido() {
-		Funcionario funcionario = Fixture.from(Funcionario.class).gimme("funcionario");
-		funcionario.setEmail("aaaa@aaaaaa");
 
+		funcionario.setEmail("aaaa@aaaaaa");
 		assertFalse(isValid(funcionario, "O email do funcionario está invalido."));
 	}
 
 	@Test
 	public void deve_aceitar_email_valido() {
-		Funcionario funcionario = Fixture.from(Funcionario.class).gimme("funcionario");
 		funcionario.setEmail("geovane@gmail.com");
-
 		assertTrue(isValid(funcionario, "O email do funcionario está invalido."));
 	}
 

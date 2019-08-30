@@ -18,6 +18,7 @@ import javax.validation.Validation;
 import javax.validation.Validator;
 import javax.validation.ValidatorFactory;
 
+import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
@@ -28,13 +29,18 @@ import br.com.six2six.fixturefactory.Fixture;
 public class EmpresaTest {
 
 	private final static Class<Empresa> CLASSE = Empresa.class;
-
+	private Empresa empresa;
 	private Validator validator;
 	private ValidatorFactory factory = Validation.buildDefaultValidatorFactory();
 
 	@BeforeClass
-	public static void setUp() {
+	public static void setup() {
 		FixtureEmpresa.fixture();
+	}
+
+	@Before
+	public void init() {
+		this.empresa = Fixture.from(CLASSE).gimme("empresa");
 	}
 
 	@Test
@@ -54,91 +60,78 @@ public class EmpresaTest {
 
 	@Test
 	public void deve_aceitar_nome_valido() {
-		Empresa empresa = Fixture.from(CLASSE).gimme("empresa");
 		empresa.setNome("Contmatic");
 		assertTrue(isValid(empresa, "O nome da empresa deve ser entre 1 e 100"));
 	}
 
 	@Test
 	public void nao_deve_aceitar_nome_nulo() {
-		Empresa empresa = Fixture.from(CLASSE).gimme("empresa");
 		empresa.setNome(null);
 		assertFalse(isValid(empresa, "O nome da empresa não pode ser nulo."));
 	}
 
 	@Test
 	public void nao_deve_aceitar_nome_vazio() {
-		Empresa empresa = Fixture.from(CLASSE).gimme("empresa");
 		empresa.setNome("");
 		assertFalse(isValid(empresa, "O nome da empresa não pode ser nulo."));
 	}
 
 	@Test
 	public void nao_deve_aceitar_email_invalido() {
-		Empresa empresa = Fixture.from(CLASSE).gimme("empresa");
 		empresa.setEmail("A@");
 		assertFalse(isValid(empresa, "O email da empresa está inválido"));
 	}
 
 	@Test
 	public void deve_aceitar_email_valido() {
-		Empresa empresa = Fixture.from(CLASSE).gimme("empresa");
 		empresa.setEmail("A@a.com");
 		assertTrue(isValid(empresa, "O email da empresa está inválido"));
 	}
 
 	@Test
 	public void nao_deve_aceitar_email_nulo() {
-		Empresa empresa = Fixture.from(CLASSE).gimme("empresa");
 		empresa.setEmail(null);
 		assertFalse(isValid(empresa, "O email da empresa não pode ser nulo"));
 	}
 
 	@Test
 	public void nao_deve_aceitar_email_vazio() {
-		Empresa empresa = Fixture.from(CLASSE).gimme("empresa");
 		empresa.setEmail("");
 		assertFalse(isValid(empresa, "O email da empresa não pode ser nulo"));
 	}
 
 	@Test
 	public void nao_deve_aceitar_cnpj_vazio() {
-		Empresa empresa = Fixture.from(CLASSE).gimme("empresa");
 		empresa.setCnpj("");
 		assertFalse(isValid(empresa, "O cnpj não pode ser nulo"));
 	}
 
 	@Test
 	public void nao_deve_aceitar_cnpj_nulo() {
-		Empresa empresa = Fixture.from(CLASSE).gimme("empresa");
 		empresa.setCnpj(null);
 		assertFalse(isValid(empresa, "O cnpj não pode ser nulo"));
 	}
 
 	@Test
 	public void deve_aceitar_cnpj_valido() {
-		Empresa empresa = Fixture.from(CLASSE).gimme("empresa");
 		empresa.setCnpj("68263601000120");
 		assertTrue(isValid(empresa, "O CNPJ da empresa está invalido"));
 	}
 
 	@Test
 	public void nao_deve_aceitar_cnpj_invalido() {
-		Empresa empresa = Fixture.from(CLASSE).gimme("empresa");
 		empresa.setCnpj("68263601000121");
 		assertFalse(isValid(empresa, "O CNPJ da empresa está invalido"));
 	}
 
 	@Test
 	public void nao_deve_aceitar_funcionarios_nulos() {
-		Empresa empresa = Fixture.from(CLASSE).gimme("empresa");
 		empresa.setFuncionarios(null);
 		assertFalse(isValid(empresa, "Os funcionários da empresa está nulo."));
 	}
 
 	@Test
 	public void nao_deve_aceitar_funcionarios_invalido() {
-		Empresa empresa = Fixture.from(CLASSE).gimme("empresa");
 		Funcionario funcionario = Fixture.from(Funcionario.class).gimme("funcionario");
 		funcionario.setIdade(-1);
 		List<Funcionario> funcionarios = new ArrayList<Funcionario>();
@@ -149,7 +142,6 @@ public class EmpresaTest {
 
 	@Test
 	public void deve_aceitar_funcionarios_valido() {
-		Empresa empresa = Fixture.from(CLASSE).gimme("empresa");
 		Funcionario funcionario = Fixture.from(Funcionario.class).gimme("funcionario");
 		funcionario.setIdade(18);
 		List<Funcionario> funcionarios = new ArrayList<Funcionario>();
@@ -160,14 +152,66 @@ public class EmpresaTest {
 
 	@Test
 	public void nao_deve_aceitar_enderecos_nulos() {
-		Empresa empresa = Fixture.from(CLASSE).gimme("empresa");
 		empresa.setEnderecos(null);
 		assertTrue(isValid(empresa, "A idade do funcionario não pode ser negativa."));
 	}
 
 	@Test
+	public void nao_deve_aceitar_url_nula() {
+		empresa.setUrl(null);
+		assertFalse(isValid(empresa, "A url do site ada empresa não pode ser vazio."));
+	}
+
+	@Test
+	public void nao_deve_aceitar_url_vazio() {
+		empresa.setUrl("");
+		assertFalse(isValid(empresa, "A url do site ada empresa não pode ser vazio."));
+	}
+
+	@Test
+	public void nao_deve_aceitar_somente_o_protocolo_da_url() {
+		empresa.setUrl("http://");
+		assertFalse(isValid(empresa, "A url do site da empresa está invalida."));
+	}
+
+	@Test
+	public void nao_deve_aceitar_somente_o_www_da_url() {
+		empresa.setUrl("www");
+		assertFalse(isValid(empresa, "A url do site da empresa está invalida."));
+	}
+
+	@Test
+	public void deve_aceitar_url_valida() {
+		empresa.setUrl("http://contmatic.com.br");
+		assertTrue(isValid(empresa, "A url do site da empresa está invalida."));
+	}
+
+	@Test
+	public void nao_deve_aceitar_somente_o_protocolo_e_www_da_url() {
+		empresa.setUrl("http://contmatic.com.br");
+		assertTrue(isValid(empresa, "A url do site da empresa está invalida."));
+	}
+
+	@Test
+	public void nao_deve_aceitar_somente_o_dominio_da_url() {
+		empresa.setUrl("contmatic.com");
+		assertFalse(isValid(empresa, "A url do site da empresa está invalida."));
+	}
+
+	@Test
+	public void nao_deve_aceitar_somente_o_dominio_da_url_com_dois_ponto_seguido() {
+		empresa.setUrl("contmatic..com");
+		assertFalse(isValid(empresa, "A url do site da empresa está invalida."));
+	}
+
+	@Test
+	public void nao_deve_aceitar_url_com_ponto_no_final() {
+		empresa.setUrl("http://www.contmatic.com.");
+		assertFalse(isValid(empresa, "A url do site da empresa está invalida."));
+	}
+
+	@Test
 	public void nao_deve_aceitar_enderecos_invalidos() {
-		Empresa empresa = Fixture.from(CLASSE).gimme("empresa");
 		Endereco endereco = Fixture.from(Endereco.class).gimme("endereco");
 		endereco.setBairro(null);
 		Set<Endereco> enderecos = new HashSet<Endereco>();
@@ -178,7 +222,6 @@ public class EmpresaTest {
 
 	@Test
 	public void deve_aceitar_enderecos_validos() {
-		Empresa empresa = Fixture.from(CLASSE).gimme("empresa");
 		Endereco endereco = Fixture.from(Endereco.class).gimme("endereco");
 		endereco.setBairro("Res. Flamboyant");
 		Set<Endereco> enderecos = new HashSet<Endereco>();
@@ -191,27 +234,27 @@ public class EmpresaTest {
 	public void deve_conter_o_valor_nome_no_toString() {
 		assertThat(new Empresa().toString(), containsString("nome"));
 	}
-	
+
 	@Test
 	public void deve_conter_o_valor_email_no_toString() {
 		assertThat(new Empresa().toString(), containsString("email"));
 	}
-	
+
 	@Test
 	public void deve_conter_o_valor_cnpj_no_toString() {
 		assertThat(new Empresa().toString(), containsString("cnpj"));
 	}
-	
+
 	@Test
 	public void deve_conter_o_valor_funcionarios_no_toString() {
 		assertThat(new Empresa().toString(), containsString("funcionarios"));
 	}
-	
+
 	@Test
 	public void deve_conter_o_valor_enderecos_no_toString() {
 		assertThat(new Empresa().toString(), containsString("enderecos"));
 	}
-	
+
 	public boolean isValid(Empresa empresa, String mensagem) {
 		validator = factory.getValidator();
 		boolean valido = true;

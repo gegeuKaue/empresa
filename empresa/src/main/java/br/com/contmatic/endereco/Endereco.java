@@ -40,7 +40,7 @@ public class Endereco {
 	private String cep;
 
 	/** The numero. */
-	@Min(value = -1, message = "O número não deve ser negativo.")
+	@Min(value = 1, message = "O número não deve ser negativo.")
 	private int numero;
 
 	/** The estado. */

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" ?>
-<testsuite tests="25" failures="0" name="br.com.contmatic.empresa.EmpresaTest" time="2.921" errors="0" skipped="0">
+<testsuite tests="34" failures="0" name="br.com.contmatic.empresa.EmpresaTest" time="2.998" errors="0" skipped="0">
   <properties>
     <property name="java.runtime.name" value="Java(TM) SE Runtime Environment"/>
     <property name="sun.boot.library.path" value="C:\Program Files\Java\jdk1.8.0_191\jre\bin"/>
@@ -27,7 +27,7 @@
     <property name="java.vm.specification.vendor" value="Oracle Corporation"/>
     <property name="user.variant" value=""/>
     <property name="os.name" value="Windows 10"/>
-    <property name="classworlds.conf" value="C:\Users\geovane.santos\Documents\empresa\.metadata\.plugins\org.eclipse.m2e.launching\launches\m2conf3106388443268301695.tmp"/>
+    <property name="classworlds.conf" value="C:\Users\geovane.santos\Documents\empresa\.metadata\.plugins\org.eclipse.m2e.launching\launches\m2conf8754264927257849193.tmp"/>
     <property name="jansi.force" value="true"/>
     <property name="sun.jnu.encoding" value="Cp1252"/>
     <property name="java.library.path" value="C:\Program Files\Java\jdk1.8.0_191\bin;C:\WINDOWS\Sun\Java\bin;C:\WINDOWS\system32;C:\WINDOWS;C:\Program Files (x86)\Common Files\Oracle\Java\javapath;C:\WINDOWS\system32;C:\WINDOWS;C:\WINDOWS\System32\Wbem;C:\WINDOWS\System32\WindowsPowerShell\v1.0\;C:\Program Files (x86)\Intel\Intel(R) Management Engine Components\DAL;C:\Program Files\Intel\Intel(R) Management Engine Components\DAL;C:\WINDOWS\System32\OpenSSH\;C:\Program Files\Git\cmd;%NVM_HOME%;%NVM_SYMLINK%;C:\Users\geovane.santos\AppData\Local\Microsoft\WindowsApps;C:\Users\geovane.santos\AppData\Local\Programs\Microsoft VS Code\bin;C:\Users\geovane.santos\AppData\Local\GitHubDesktop\bin;C:\Users\geovane.santos\AppData\Roaming\nvm;C:\Program Files\nodejs;."/>
@@ -64,29 +64,38 @@
     <property name="sun.desktop" value="windows"/>
     <property name="sun.cpu.isalist" value="amd64"/>
   </properties>
-  <testcase classname="br.com.contmatic.empresa.EmpresaTest" name="deve_conter_o_valor_email_no_toString" time="0.015"/>
+  <testcase classname="br.com.contmatic.empresa.EmpresaTest" name="deve_conter_o_valor_email_no_toString" time="0.047"/>
   <testcase classname="br.com.contmatic.empresa.EmpresaTest" name="deve_conter_o_valor_nome_no_toString" time="0"/>
+  <testcase classname="br.com.contmatic.empresa.EmpresaTest" name="nao_deve_aceitar_url_nula" time="0.546"/>
   <testcase classname="br.com.contmatic.empresa.EmpresaTest" name="deve_conter_o_valor_enderecos_no_toString" time="0"/>
-  <testcase classname="br.com.contmatic.empresa.EmpresaTest" name="nao_deve_aceitar_nome_vazio" time="0.531"/>
-  <testcase classname="br.com.contmatic.empresa.EmpresaTest" name="nao_deve_aceitar_cnpj_nulo" time="0.016"/>
-  <testcase classname="br.com.contmatic.empresa.EmpresaTest" name="deve_aceitar_nome_valido" time="0.016"/>
+  <testcase classname="br.com.contmatic.empresa.EmpresaTest" name="nao_deve_aceitar_nome_vazio" time="0.016"/>
+  <testcase classname="br.com.contmatic.empresa.EmpresaTest" name="nao_deve_aceitar_cnpj_nulo" time="0.015"/>
+  <testcase classname="br.com.contmatic.empresa.EmpresaTest" name="nao_deve_aceitar_somente_o_dominio_da_url_com_dois_ponto_seguido" time="0.016"/>
+  <testcase classname="br.com.contmatic.empresa.EmpresaTest" name="deve_aceitar_nome_valido" time="0.015"/>
   <testcase classname="br.com.contmatic.empresa.EmpresaTest" name="deve_aceitar_enderecos_validos" time="0.016"/>
+  <testcase classname="br.com.contmatic.empresa.EmpresaTest" name="nao_deve_aceitar_somente_o_protocolo_da_url" time="0.016"/>
   <testcase classname="br.com.contmatic.empresa.EmpresaTest" name="nao_deve_aceitar_funcionarios_nulos" time="0"/>
+  <testcase classname="br.com.contmatic.empresa.EmpresaTest" name="nao_deve_aceitar_url_com_ponto_no_final" time="0"/>
   <testcase classname="br.com.contmatic.empresa.EmpresaTest" name="deve_conter_o_valor_cnpj_no_toString" time="0"/>
-  <testcase classname="br.com.contmatic.empresa.EmpresaTest" name="deve_respeitar_hash_code" time="0.109"/>
-  <testcase classname="br.com.contmatic.empresa.EmpresaTest" name="nao_deve_aceitar_cnpj_invalido" time="0.015"/>
-  <testcase classname="br.com.contmatic.empresa.EmpresaTest" name="nao_deve_aceitar_cnpj_vazio" time="0"/>
-  <testcase classname="br.com.contmatic.empresa.EmpresaTest" name="nao_deve_aceitar_nome_nulo" time="0"/>
-  <testcase classname="br.com.contmatic.empresa.EmpresaTest" name="nao_deve_aceitar_email_vazio" time="0.015"/>
-  <testcase classname="br.com.contmatic.empresa.EmpresaTest" name="deve_respeitar_equals" time="0.016"/>
-  <testcase classname="br.com.contmatic.empresa.EmpresaTest" name="nao_deve_aceitar_enderecos_nulos" time="0"/>
-  <testcase classname="br.com.contmatic.empresa.EmpresaTest" name="nao_deve_aceitar_email_nulo" time="0.016"/>
-  <testcase classname="br.com.contmatic.empresa.EmpresaTest" name="deve_aceitar_cnpj_valido" time="0"/>
-  <testcase classname="br.com.contmatic.empresa.EmpresaTest" name="deve_respeitar_os_get_set" time="2.125"/>
-  <testcase classname="br.com.contmatic.empresa.EmpresaTest" name="deve_aceitar_funcionarios_valido" time="0.016"/>
-  <testcase classname="br.com.contmatic.empresa.EmpresaTest" name="nao_deve_aceitar_funcionarios_invalido" time="0"/>
-  <testcase classname="br.com.contmatic.empresa.EmpresaTest" name="deve_aceitar_email_valido" time="0.015"/>
+  <testcase classname="br.com.contmatic.empresa.EmpresaTest" name="nao_deve_aceitar_somente_o_www_da_url" time="0"/>
+  <testcase classname="br.com.contmatic.empresa.EmpresaTest" name="deve_respeitar_hash_code" time="0.14"/>
+  <testcase classname="br.com.contmatic.empresa.EmpresaTest" name="nao_deve_aceitar_cnpj_invalido" time="0.016"/>
+  <testcase classname="br.com.contmatic.empresa.EmpresaTest" name="nao_deve_aceitar_cnpj_vazio" time="0.015"/>
+  <testcase classname="br.com.contmatic.empresa.EmpresaTest" name="nao_deve_aceitar_nome_nulo" time="0.016"/>
+  <testcase classname="br.com.contmatic.empresa.EmpresaTest" name="nao_deve_aceitar_email_vazio" time="0.016"/>
+  <testcase classname="br.com.contmatic.empresa.EmpresaTest" name="deve_respeitar_equals" time="0"/>
+  <testcase classname="br.com.contmatic.empresa.EmpresaTest" name="nao_deve_aceitar_enderecos_nulos" time="0.015"/>
+  <testcase classname="br.com.contmatic.empresa.EmpresaTest" name="nao_deve_aceitar_url_vazio" time="0"/>
+  <testcase classname="br.com.contmatic.empresa.EmpresaTest" name="nao_deve_aceitar_email_nulo" time="0"/>
+  <testcase classname="br.com.contmatic.empresa.EmpresaTest" name="deve_aceitar_cnpj_valido" time="0.015"/>
+  <testcase classname="br.com.contmatic.empresa.EmpresaTest" name="nao_deve_aceitar_somente_o_dominio_da_url" time="0"/>
+  <testcase classname="br.com.contmatic.empresa.EmpresaTest" name="deve_respeitar_os_get_set" time="2.047"/>
+  <testcase classname="br.com.contmatic.empresa.EmpresaTest" name="nao_deve_aceitar_somente_o_protocolo_e_www_da_url" time="0.015"/>
+  <testcase classname="br.com.contmatic.empresa.EmpresaTest" name="deve_aceitar_funcionarios_valido" time="0"/>
+  <testcase classname="br.com.contmatic.empresa.EmpresaTest" name="nao_deve_aceitar_funcionarios_invalido" time="0.016"/>
+  <testcase classname="br.com.contmatic.empresa.EmpresaTest" name="deve_aceitar_email_valido" time="0"/>
   <testcase classname="br.com.contmatic.empresa.EmpresaTest" name="deve_conter_o_valor_funcionarios_no_toString" time="0"/>
   <testcase classname="br.com.contmatic.empresa.EmpresaTest" name="nao_deve_aceitar_email_invalido" time="0"/>
+  <testcase classname="br.com.contmatic.empresa.EmpresaTest" name="deve_aceitar_url_valida" time="0"/>
   <testcase classname="br.com.contmatic.empresa.EmpresaTest" name="nao_deve_aceitar_enderecos_invalidos" time="0"/>
 </testsuite>

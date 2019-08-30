@@ -7,6 +7,7 @@ import java.util.Set;
 
 import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
 
 import org.apache.commons.lang3.builder.EqualsBuilder;
@@ -18,12 +19,19 @@ import org.hibernate.validator.constraints.NotBlank;
 import br.com.caelum.stella.bean.validation.CNPJ;
 import br.com.contmatic.endereco.Endereco;
 
+// TODO: Auto-generated Javadoc
 /**
+ * The Class Empresa.
+ *
  * @author geovane.santos
  */
 
 /**
  * The Class Empresa.
+ */
+/**
+ * @author geovane.santos
+ *
  */
 public class Empresa {
 
@@ -52,6 +60,11 @@ public class Empresa {
 	@Valid
 	private List<Funcionario> funcionarios;
 
+	/** The url. */
+	@NotBlank(message = "A url do site ada empresa não pode ser vazio.")
+	@Pattern(regexp = "^(https?|http|ftp|file)://[-a-zA-Z0-9+&@#/%?=~_|!:,.;]*[-a-zA-Z0-9+&@#/%=~_|]", message = "A url do site da empresa está invalida.")
+	private String url;
+
 	/**
 	 * Gets the nome.
 	 *
@@ -59,6 +72,24 @@ public class Empresa {
 	 */
 	public String getNome() {
 		return nome;
+	}
+
+	/**
+	 * Gets the url.
+	 *
+	 * @return the url
+	 */
+	public String getUrl() {
+		return url;
+	}
+
+	/**
+	 * Sets the url.
+	 *
+	 * @param url the new url
+	 */
+	public void setUrl(String url) {
+		this.url = url;
 	}
 
 	/**

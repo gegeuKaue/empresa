@@ -18,7 +18,6 @@ import org.joda.time.LocalTime;
 import br.com.caelum.stella.bean.validation.CPF;
 import br.com.contmatic.telefone.Telefone;
 
-
 /**
  * The Class Funcionario.
  *
@@ -45,7 +44,7 @@ public class Funcionario {
 	@NotNull(message = "O horario de saida funcionario não pode ser nulo.")
 	private LocalTime saida;
 
-	/** The data contratacao. */
+	@NotNull(message = "A data de contratação do funcionario não deve ser nula")
 	@Past(message = "A data de contratação do funcionario não deve ser maior que a atual")
 	private LocalDate dataContratacao;
 
