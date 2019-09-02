@@ -75,6 +75,12 @@ public class FuncionarioTest {
 	}
 
 	@Test
+	public void deve_aceitar_nome_valido() {
+		funcionario.setNome("Geovane");
+		assertTrue(isValid(funcionario, "O nome do funcionario não deve ser vázio."));
+	}
+
+	@Test
 	public void nao_deve_aceitar_cargo_vazio() {
 		funcionario.setCargo("");
 		assertFalse(isValid(funcionario, "O cargo do funcionario não deve ser vázio."));
@@ -87,6 +93,12 @@ public class FuncionarioTest {
 	}
 
 	@Test
+	public void deve_aceitar_cargo_valido() {
+		funcionario.setCargo("estagiario");
+		assertTrue(isValid(funcionario, "O cargo do funcionario não deve ser vázio."));
+	}
+
+	@Test
 	public void nao_deve_aceitar_idade_negativa() {
 		funcionario.setIdade(-5);
 		assertFalse(isValid(funcionario, "A idade do funcionario não pode ser negativa."));
@@ -94,26 +106,38 @@ public class FuncionarioTest {
 
 	@Test
 	public void nao_deve_aceitar_idade_igual_a_zero() {
-		funcionario.setIdade(-5);
+		funcionario.setIdade(0);
 		assertFalse(isValid(funcionario, "A idade do funcionario não pode ser negativa."));
 	}
 
 	@Test
 	public void deve_aceitar_idade_valida() {
-		funcionario.setIdade(5);
+		funcionario.setIdade(18);
 		assertTrue(isValid(funcionario, "A idade do funcionario não pode ser negativa."));
 	}
 
 	@Test
-	public void deve_aceitar_entrada_valida() {
+	public void nao_deve_aceitar_entrada_nula() {
 		funcionario.setEntrada(null);
 		assertFalse(isValid(funcionario, "O horario de entrada funcionario não pode ser nulo."));
 	}
 
 	@Test
-	public void deve_aceitar_saida_valida() {
+	public void aceitar_entrada_valido() {
+		funcionario.setEntrada(LocalTime.now());
+		assertTrue(isValid(funcionario, "O horario de entrada funcionario não pode ser nulo."));
+	}
+
+	@Test
+	public void nao_deve_aceitar_saida_nula() {
 		funcionario.setSaida(null);
 		assertFalse(isValid(funcionario, "O horario de saida funcionario não pode ser nulo."));
+	}
+
+	@Test
+	public void deve_aceitar_saida_valida() {
+		funcionario.setSaida(LocalTime.now());
+		assertTrue(isValid(funcionario, "O horario de saida funcionario não pode ser nulo."));
 	}
 
 	@Test
@@ -129,8 +153,38 @@ public class FuncionarioTest {
 	}
 
 	@Test
-	public void nao_deve_aceitar_cpf_ivalido() {
+	public void nao_deve_aceitar_cpf_invalido() {
 		funcionario.setCpf("47878244064");
+		assertFalse(isValid(funcionario, "O CPF do funcionario está inválido"));
+	}
+
+	@Test
+	public void nao_deve_aceitar_cpf_com_letra() {
+		funcionario.setCpf("4787824406g");
+		assertFalse(isValid(funcionario, "O CPF do funcionario está inválido"));
+	}
+
+	@Test
+	public void nao_deve_aceitar_cpf_muito_numero() {
+		funcionario.setCpf("4787824406555555");
+		assertFalse(isValid(funcionario, "O CPF do funcionario está inválido"));
+	}
+
+	@Test
+	public void nao_deve_aceitar_cpf_menos_numero() {
+		funcionario.setCpf("55966");
+		assertFalse(isValid(funcionario, "O CPF do funcionario está inválido"));
+	}
+
+	@Test
+	public void nao_deve_aceitar_cpf_com_mascara() {
+		funcionario.setCpf("102.057.110-14");
+		assertFalse(isValid(funcionario, "O CPF do funcionario está inválido"));
+	}
+
+	@Test
+	public void nao_deve_aceitar_cpf_com_numero_repitido() {
+		funcionario.setCpf("11111111111");
 		assertFalse(isValid(funcionario, "O CPF do funcionario está inválido"));
 	}
 
@@ -159,12 +213,6 @@ public class FuncionarioTest {
 	}
 
 	@Test
-	public void deve_aceitar_cpf_com_letras() {
-		funcionario.setCpf("478782d4065");
-		assertFalse(isValid(funcionario, "O CPF do funcionario está inválido"));
-	}
-
-	@Test
 	public void nao_deve_aceitar_telefones_nulos() {
 		funcionario.setTelefones(null);
 		assertFalse(isValid(funcionario, "O telefone do funcionario não pode ser nulo"));
@@ -181,15 +229,33 @@ public class FuncionarioTest {
 	}
 
 	@Test
-	public void nao_deve_aceitar_email_invalido() {
-		funcionario.setEmail("aaaa@aaaaaa");
+	public void deve_aceitar_email_valido() {
+		funcionario.setEmail("geovane@gmail.com");
+		assertTrue(isValid(funcionario, "O email do funcionario está invalido."));
+	}
+
+	@Test
+	public void nao_deve_aceitar_email_com_2_arroba() {
+		funcionario.setEmail("A@@gmail.com");
 		assertFalse(isValid(funcionario, "O email do funcionario está invalido."));
 	}
 
 	@Test
-	public void deve_aceitar_email_valido() {
-		funcionario.setEmail("geovane@gmail.com");
-		assertTrue(isValid(funcionario, "O email do funcionario está invalido."));
+	public void nao_deve_aceitar_email_com_arroba_no_comeco() {
+		funcionario.setEmail("@gmail.com");
+		assertFalse(isValid(funcionario, "O email do funcionario está invalido."));
+	}
+
+	@Test
+	public void nao_deve_aceitar_email_com_ponto_no_comeco() {
+		funcionario.setEmail(".a@gmail.com");
+		assertFalse(isValid(funcionario, "O email do funcionario está invalido."));
+	}
+
+	@Test
+	public void deve_aceitar_email_com_numero() {
+		funcionario.setEmail("a2@gmail.com");
+		assertTrue(isValid(funcionario, "O email da empresa está inválido"));
 	}
 
 	@Test

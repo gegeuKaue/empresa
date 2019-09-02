@@ -84,6 +84,36 @@ public class EmpresaTest {
 	}
 
 	@Test
+	public void nao_deve_aceitar_email_com_2_arroba() {
+		empresa.setEmail("A@@gmail.com");
+		assertFalse(isValid(empresa, "O email da empresa está inválido"));
+	}
+
+	@Test
+	public void nao_deve_aceitar_email_com_2_ponto_seguindo() {
+		empresa.setEmail("A@gmail..com");
+		assertFalse(isValid(empresa, "O email da empresa está inválido"));
+	}
+
+	@Test
+	public void nao_deve_aceitar_email_com_arroba_no_comeco() {
+		empresa.setEmail("@gmail.com");
+		assertFalse(isValid(empresa, "O email da empresa está inválido"));
+	}
+
+	@Test
+	public void nao_deve_aceitar_email_com_ponto_no_comeco() {
+		empresa.setEmail(".a@gmail.com");
+		assertFalse(isValid(empresa, "O email da empresa está inválido"));
+	}
+
+	@Test
+	public void deve_aceitar_email_com_numero() {
+		empresa.setEmail("a2@gmail.com");
+		assertTrue(isValid(empresa, "O email da empresa está inválido"));
+	}
+
+	@Test
 	public void deve_aceitar_email_valido() {
 		empresa.setEmail("A@a.com");
 		assertTrue(isValid(empresa, "O email da empresa está inválido"));
@@ -117,6 +147,36 @@ public class EmpresaTest {
 	public void deve_aceitar_cnpj_valido() {
 		empresa.setCnpj("68263601000120");
 		assertTrue(isValid(empresa, "O CNPJ da empresa está invalido"));
+	}
+
+	@Test
+	public void nao_deve_aceitar_cnpj_com_menos_numeros() {
+		empresa.setCnpj("682636");
+		assertFalse(isValid(empresa, "O CNPJ da empresa está invalido"));
+	}
+
+	@Test
+	public void nao_deve_aceitar_cnpj_com_mais_numeros() {
+		empresa.setCnpj("68263888888888888888888886");
+		assertFalse(isValid(empresa, "O CNPJ da empresa está invalido"));
+	}
+
+	@Test
+	public void nao_deve_aceitar_cnpj_com_numeros_repetido() {
+		empresa.setCnpj("11111111111111");
+		assertFalse(isValid(empresa, "O CNPJ da empresa está invalido"));
+	}
+
+	@Test
+	public void nao_deve_aceitar_cnpj_com_letras() {
+		empresa.setCnpj("6826360100012g");
+		assertFalse(isValid(empresa, "O CNPJ da empresa está invalido"));
+	}
+
+	@Test
+	public void nao_deve_aceitar_cnpj_valido_com_mascara() {
+		empresa.setCnpj("54.873.456/0001-95");
+		assertFalse(isValid(empresa, "O CNPJ da empresa está invalido"));
 	}
 
 	@Test
@@ -208,6 +268,12 @@ public class EmpresaTest {
 	@Test
 	public void nao_deve_aceitar_url_com_ponto_no_final() {
 		empresa.setUrl("http://www.contmatic.com.");
+		assertFalse(isValid(empresa, "A url do site da empresa está invalida."));
+	}
+	
+	@Test
+	public void nao_deve_aceitar_url_sem_www() {
+		empresa.setUrl("http://contmatic.com.");
 		assertFalse(isValid(empresa, "A url do site da empresa está invalida."));
 	}
 

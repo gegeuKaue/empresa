@@ -66,6 +66,12 @@ public class EnderecoTest {
 	}
 
 	@Test
+	public void deve_aceitar_nome_valido() {
+		endereco.setNome("Rua Joao Pedroso Batista");
+		assertTrue(isValid(endereco, "O nome não pode ser vazio."));
+	}
+
+	@Test
 	public void nao_deve_aceitar_bairro_vazio() {
 		endereco.setBairro("");
 		assertFalse(isValid(endereco, "O nome do bairro não pode ser vázio."));
@@ -78,6 +84,12 @@ public class EnderecoTest {
 	}
 
 	@Test
+	public void deve_aceitar_bairro_valido() {
+		endereco.setBairro("Res. Flamboyant");
+		assertTrue(isValid(endereco, "O nome do bairro não pode ser vázio."));
+	}
+
+	@Test
 	public void nao_deve_aceitar_cidade_nulo() {
 		endereco.setCidade(null);
 		assertFalse(isValid(endereco, "O nome da cidade não deve ser vázio."));
@@ -87,6 +99,12 @@ public class EnderecoTest {
 	public void nao_deve_aceitar_cidade_vazio() {
 		endereco.setCidade("");
 		assertFalse(isValid(endereco, "O nome da cidade não deve ser vázio."));
+	}
+
+	@Test
+	public void deve_aceitar_cidade_valido() {
+		endereco.setCidade("Itaquaquecetuba");
+		assertTrue(isValid(endereco, "O nome da cidade não deve ser vázio."));
 	}
 
 	@Test

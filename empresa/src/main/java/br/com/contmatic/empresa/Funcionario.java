@@ -6,12 +6,12 @@ import javax.validation.Valid;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Past;
-import javax.validation.constraints.Pattern;
 
 import org.apache.commons.lang3.builder.EqualsBuilder;
 import org.apache.commons.lang3.builder.HashCodeBuilder;
 import org.apache.commons.lang3.builder.ToStringBuilder;
 import org.apache.commons.lang3.builder.ToStringStyle;
+import org.hibernate.validator.constraints.Email;
 import org.hibernate.validator.constraints.NotBlank;
 import org.joda.time.LocalDate;
 import org.joda.time.LocalTime;
@@ -34,7 +34,7 @@ public class Funcionario {
 	private String cargo;
 
 	/** The idade. */
-	@Min(value = 0, message = "A idade do funcionario não pode ser negativa.")
+	@Min(value = 1, message = "A idade do funcionario não pode ser negativa.")
 	private int idade;
 
 	/** The entrada. */
@@ -61,7 +61,7 @@ public class Funcionario {
 
 	/** The email. */
 	@NotBlank(message = "O email não pode ser nulo")
-	@Pattern(regexp = "^([_a-zA-Z0-9-]+(\\.[_a-zA-Z0-9-]+)*@[a-zA-Z0-9-]+(\\.[a-zA-Z0-9-]+)*(\\.[a-zA-Z]{1,6}))?$", message = "O email do funcionario está invalido.")
+	@Email(message = "O email do funcionario está invalido.")
 	private String email;
 
 	/**
