@@ -20,7 +20,7 @@ import br.com.caelum.stella.bean.validation.CNPJ;
 import br.com.contmatic.endereco.Endereco;
 import br.com.contmatic.telefone.Telefone;
 
-// TODO: Auto-generated Javadoc
+
 /**
  * The Class Empresa.
  */
