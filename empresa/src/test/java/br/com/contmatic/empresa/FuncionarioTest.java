@@ -81,6 +81,42 @@ public class FuncionarioTest {
 	}
 
 	@Test
+	public void deve_aceitar_nome_sem_espaco() {
+		funcionario.setNome("Contmatic");
+		assertTrue(isValid(funcionario, "O nome do funcionário está incorreto"));
+	}
+
+	@Test
+	public void deve_aceitar_nome_com_acento() {
+		funcionario.setNome("João Da Esquiná");
+		assertTrue(isValid(funcionario, "O nome do funcionário está incorreto"));
+	}
+
+	@Test
+	public void deve_aceitar_nome_com_cedilha() {
+		funcionario.setNome("Moço Legal");
+		assertTrue(isValid(funcionario, "O nome do funcionário está incorreto"));
+	}
+
+	@Test
+	public void deve_aceitar_nome_com_espaco() {
+		funcionario.setNome("Cont matic");
+		assertTrue(isValid(funcionario, "O nome do funcionário está incorreto"));
+	}
+
+	@Test
+	public void nao_deve_aceitar_nome_com_arroba() {
+		funcionario.setNome("Cont@ matic");
+		assertFalse(isValid(funcionario, "O nome do funcionário está incorreto"));
+	}
+
+	@Test
+	public void nao_deve_aceitar_nome_com_cerquilha() {
+		funcionario.setNome("Cont# matic");
+		assertFalse(isValid(funcionario, "O nome do funcionário está incorreto"));
+	}
+
+	@Test
 	public void nao_deve_aceitar_cargo_vazio() {
 		funcionario.setCargo("");
 		assertFalse(isValid(funcionario, "O cargo do funcionario não deve ser vázio."));

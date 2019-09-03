@@ -96,9 +96,6 @@ public enum Estado {
 	/** The nome estado. */
 	private String nomeEstado;
 
-	/** The length. */
-	public static int LENGTH = values().length;
-
 	/**
 	 * Instantiates a new estado.
 	 *

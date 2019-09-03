@@ -10,6 +10,7 @@ import static org.junit.Assert.assertTrue;
 
 import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.Set;
 
@@ -22,7 +23,6 @@ import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
-import br.com.contmatic.endereco.Endereco;
 import br.com.contmatic.fixture.FixtureEmpresa;
 import br.com.contmatic.telefone.Telefone;
 import br.com.six2six.fixturefactory.Fixture;
@@ -78,9 +78,69 @@ public class EmpresaTest {
 	}
 
 	@Test
+	public void deve_aceitar_nome_sem_espaco() {
+		empresa.setNome("Contmatic");
+		assertTrue(isValid(empresa, "O nome da empresa está incorreto"));
+	}
+
+	@Test
+	public void deve_aceitar_nome_com_acento() {
+		empresa.setNome("João Da Esquiná");
+		assertTrue(isValid(empresa, "O nome da empresa está incorreto"));
+	}
+
+	@Test
+	public void deve_aceitar_nome_com_cedilha() {
+		empresa.setNome("Moço Legal");
+		assertTrue(isValid(empresa, "O nome da empresa está incorreto"));
+	}
+
+	@Test
+	public void deve_aceitar_nome_com_espaco() {
+		empresa.setNome("Cont matic");
+		assertTrue(isValid(empresa, "O nome da empresa está incorreto"));
+	}
+
+	@Test
+	public void nao_deve_aceitar_nome_com_arroba() {
+		empresa.setNome("Cont@ matic");
+		assertFalse(isValid(empresa, "O nome da empresa está incorreto"));
+	}
+
+	@Test
+	public void nao_deve_aceitar_nome_com_cerquilha() {
+		empresa.setNome("Cont# matic");
+		assertFalse(isValid(empresa, "O nome da empresa está incorreto"));
+	}
+
+	@Test
 	public void nao_deve_aceitar_email_invalido() {
 		empresa.setEmail("A@");
 		assertFalse(isValid(empresa, "O email da empresa está inválido"));
+	}
+
+	@Test
+	public void nao_deve_ter_lista_de_fincionario_vazia() {
+		empresa.setFuncionarios(new ArrayList<Funcionario>());
+		assertFalse(isValid(empresa, "Não tem nenhum funcionario cadastrado na empresa."));
+	}
+
+	@Test
+	public void deve_ter_lista_de_funcionario_com_funcionario() {
+		List<Funcionario> funcionarios = new ArrayList<Funcionario>();
+		funcionarios.add(Fixture.from(Funcionario.class).gimme("funcionario"));
+		empresa.setFuncionarios(funcionarios);
+		assertTrue(isValid(empresa, "Não tem nenhum funcionario cadastrado na empresa."));
+	}
+
+	@Test
+	public void nao_deve_ter_lista_de_fincionario_com_mais_de_100000() {
+		List<Funcionario> funcionarios = new LinkedList<Funcionario>();
+		for (int i = 0; i <= 10005; i++) {
+			funcionarios.add(Fixture.from(Funcionario.class).gimme("funcionario"));
+		}
+		empresa.setFuncionarios(funcionarios);
+		assertFalse(isValid(empresa, "O número máximo de funcionario da empresa é de 10000"));
 	}
 
 	@Test
@@ -270,31 +330,11 @@ public class EmpresaTest {
 		empresa.setUrl("http://www.contmatic.com.");
 		assertFalse(isValid(empresa, "A url do site da empresa está invalida."));
 	}
-	
+
 	@Test
 	public void nao_deve_aceitar_url_sem_www() {
 		empresa.setUrl("http://contmatic.com.");
 		assertFalse(isValid(empresa, "A url do site da empresa está invalida."));
-	}
-
-	@Test
-	public void nao_deve_aceitar_enderecos_invalidos() {
-		Endereco endereco = Fixture.from(Endereco.class).gimme("endereco");
-		endereco.setBairro(null);
-		Set<Endereco> enderecos = new HashSet<Endereco>();
-		enderecos.add(endereco);
-		empresa.setEnderecos(enderecos);
-		assertFalse(isValid(empresa, "O nome do bairro não pode ser vázio."));
-	}
-
-	@Test
-	public void deve_aceitar_enderecos_validos() {
-		Endereco endereco = Fixture.from(Endereco.class).gimme("endereco");
-		endereco.setBairro("Res. Flamboyant");
-		Set<Endereco> enderecos = new HashSet<Endereco>();
-		enderecos.add(endereco);
-		empresa.setEnderecos(enderecos);
-		assertTrue(isValid(empresa, "O nome do bairro não pode ser vázio."));
 	}
 
 	@Test

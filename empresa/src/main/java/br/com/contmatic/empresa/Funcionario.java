@@ -6,17 +6,20 @@ import javax.validation.Valid;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Past;
+import javax.validation.constraints.Pattern;
 
 import org.apache.commons.lang3.builder.EqualsBuilder;
 import org.apache.commons.lang3.builder.HashCodeBuilder;
 import org.apache.commons.lang3.builder.ToStringBuilder;
 import org.apache.commons.lang3.builder.ToStringStyle;
 import org.hibernate.validator.constraints.Email;
+import org.hibernate.validator.constraints.Length;
 import org.hibernate.validator.constraints.NotBlank;
 import org.joda.time.LocalDate;
 import org.joda.time.LocalTime;
 
 import br.com.caelum.stella.bean.validation.CPF;
+import br.com.contmatic.regex.Regex;
 import br.com.contmatic.telefone.Telefone;
 
 /**
@@ -27,10 +30,13 @@ import br.com.contmatic.telefone.Telefone;
 public class Funcionario {
 	/** The nome. */
 	@NotBlank(message = "O nome do funcionario não deve ser vázio.")
+	@Length(max = 500, message = "O nome máximo de funcionario é de {max} caracteres")
+	@Pattern(regexp = Regex.NOME, message = "O nome do funcionário está incorreto")
 	private String nome;
 
 	/** The cargo. */
 	@NotBlank(message = "O cargo do funcionario não deve ser vázio.")
+	@Length(max = 500, message = "O cargo máximo de funcionario é de {max} caracteres")
 	private String cargo;
 
 	/** The idade. */
@@ -50,18 +56,19 @@ public class Funcionario {
 	private LocalDate dataContratacao;
 
 	/** The cpf. */
-	@NotBlank(message = "O cep do funcionario não pode ser nulo.")
 	@CPF(message = "O CPF do funcionario está inválido")
+	@NotBlank(message = "O cep do funcionario não pode ser nulo.")
 	private String cpf;
 
 	/** The telefone. */
-	@NotNull(message = "O telefone do funcionario não pode ser nulo")
 	@Valid
+	@NotNull(message = "O telefone do funcionario não pode ser nulo")
 	private Set<Telefone> telefones;
 
 	/** The email. */
 	@NotBlank(message = "O email não pode ser nulo")
 	@Email(message = "O email do funcionario está invalido.")
+	@Length(max = 500, message = "O e-mail do funcionario deve ter no máximo {max} caracteres")
 	private String email;
 
 	/**

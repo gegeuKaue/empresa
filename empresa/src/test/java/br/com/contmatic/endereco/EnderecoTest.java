@@ -54,57 +54,24 @@ public class EnderecoTest {
 	}
 
 	@Test
-	public void nao_deve_aceitar_nome_nulo() {
-		endereco.setNome(null);
-		assertFalse(isValid(endereco, "O nome não pode ser vazio."));
-	}
-
-	@Test
-	public void nao_deve_aceitar_nome_vazio() {
-		endereco.setNome("");
-		assertFalse(isValid(endereco, "O nome não pode ser vazio."));
-	}
-
-	@Test
-	public void deve_aceitar_nome_valido() {
-		endereco.setNome("Rua Joao Pedroso Batista");
-		assertTrue(isValid(endereco, "O nome não pode ser vazio."));
-	}
-
-	@Test
-	public void nao_deve_aceitar_bairro_vazio() {
-		endereco.setBairro("");
-		assertFalse(isValid(endereco, "O nome do bairro não pode ser vázio."));
-	}
-
-	@Test
-	public void nao_deve_aceitar_bairro_nulo() {
-		endereco.setBairro(null);
-		assertFalse(isValid(endereco, "O nome do bairro não pode ser vázio."));
-	}
-
-	@Test
-	public void deve_aceitar_bairro_valido() {
-		endereco.setBairro("Res. Flamboyant");
-		assertTrue(isValid(endereco, "O nome do bairro não pode ser vázio."));
-	}
-
-	@Test
 	public void nao_deve_aceitar_cidade_nulo() {
 		endereco.setCidade(null);
-		assertFalse(isValid(endereco, "O nome da cidade não deve ser vázio."));
+		assertFalse(isValid(endereco, "Os valores da cidade não pode ser nulo"));
 	}
 
 	@Test
-	public void nao_deve_aceitar_cidade_vazio() {
-		endereco.setCidade("");
-		assertFalse(isValid(endereco, "O nome da cidade não deve ser vázio."));
+	public void nao_deve_aceitar_cidade_invalida() {
+		Cidade cidade = (Cidade) Fixture.from(Cidade.class).gimme("cidade");
+		cidade.setBairro(null);
+		endereco.setCidade(cidade);
+		assertFalse(isValid(endereco, "O Bairro da cidade não pode está vazio"));
 	}
 
 	@Test
-	public void deve_aceitar_cidade_valido() {
-		endereco.setCidade("Itaquaquecetuba");
-		assertTrue(isValid(endereco, "O nome da cidade não deve ser vázio."));
+	public void deve_aceitar_cidade_valida() {
+		Cidade cidade = (Cidade) Fixture.from(Cidade.class).gimme("cidade");
+		endereco.setCidade(cidade);
+		assertTrue(isValid(endereco, "O Bairro da cidade não pode está vazio"));
 	}
 
 	@Test
@@ -156,22 +123,6 @@ public class EnderecoTest {
 	}
 
 	@Test
-	public void nao_deve_aceitar_estado_nulo() {
-		endereco.setEstado(null);
-		assertFalse(isValid(endereco, "O estado não pode ser nulo."));
-	}
-
-	@Test
-	public void deve_conter_o_valor_nome_no_toString() {
-		assertThat(new Endereco().toString(), containsString("nome"));
-	}
-
-	@Test
-	public void deve_conter_o_valor_bairro_no_toString() {
-		assertThat(new Endereco().toString(), containsString("bairro"));
-	}
-
-	@Test
 	public void deve_conter_o_valor_cidade_no_toString() {
 		assertThat(new Endereco().toString(), containsString("cidade"));
 	}
@@ -184,11 +135,6 @@ public class EnderecoTest {
 	@Test
 	public void deve_conter_o_numero_no_toString() {
 		assertThat(new Endereco().toString(), containsString("numero"));
-	}
-
-	@Test
-	public void deve_conter_o_estado_no_toString() {
-		assertThat(new Endereco().toString(), containsString("estado"));
 	}
 
 	public boolean isValid(Endereco endereco, String mensagem) {

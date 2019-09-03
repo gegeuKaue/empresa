@@ -14,12 +14,13 @@ import org.apache.commons.lang3.builder.EqualsBuilder;
 import org.apache.commons.lang3.builder.HashCodeBuilder;
 import org.apache.commons.lang3.builder.ToStringBuilder;
 import org.hibernate.validator.constraints.Email;
+import org.hibernate.validator.constraints.Length;
 import org.hibernate.validator.constraints.NotBlank;
 
 import br.com.caelum.stella.bean.validation.CNPJ;
 import br.com.contmatic.endereco.Endereco;
+import br.com.contmatic.regex.Regex;
 import br.com.contmatic.telefone.Telefone;
-
 
 /**
  * The Class Empresa.
@@ -31,13 +32,15 @@ import br.com.contmatic.telefone.Telefone;
 public class Empresa {
 
 	/** The nome. */
-	@Size(min = 1, max = 100, message = "O nome da empresa deve ser entre 1 e 100")
 	@NotBlank(message = "O nome da empresa não pode ser nulo.")
+	@Length(max = 100, message = "O nome da empresa deve ter {max} caracteres")
+	@Pattern(regexp = Regex.NOME, message = "O nome da empresa está incorreto")
 	private String nome;
 
 	/** The email. */
-	@NotBlank(message = "O email da empresa não pode ser nulo")
 	@Email(message = "O email da empresa está inválido")
+	@NotBlank(message = "O email da empresa não pode ser nulo")
+	@Length(max = 500, message = "O e-mail da empresa deve ter no máximo {max} caracteres")
 	private String email;
 
 	/** The cnpj. */
@@ -46,23 +49,29 @@ public class Empresa {
 	private String cnpj;
 
 	/** The endereco. */
-	@NotNull(message = "O endereço da empresa está vazio")
 	@Valid
+	@NotNull(message = "O endereço da empresa está vazio")
+	@Size.List({ @Size(min = 1, message = "A lista de endereço está vazia"),
+			@Size(max = 50, message = "A lista de endereço máxima é de {max}") })
 	private Set<Endereco> enderecos;
 
 	/** The telefones. */
-	@NotNull(message = "O telefone da empresa não pode ser nulo")
 	@Valid
+	@NotNull(message = "O telefone da empresa não pode ser nulo")
+	@Size.List({ @Size(min = 1, message = "A lista de endereço da empresa não deve ser vazio."),
+			@Size(max = 5000, message = "A lista de endereço da empresa máxima é de {max}.") })
 	private Set<Telefone> telefones;
 
 	/** The lista funcionario. */
-	@NotNull(message = "Os funcionários da empresa está nulo.")
 	@Valid
+	@NotNull(message = "Os funcionários da empresa está nulo.")
+	@Size.List({ @Size(max = 10000, message = "O número máximo de funcionario da empresa é de {max}"),
+			@Size(min = 1, message = "Não tem nenhum funcionario cadastrado na empresa.") })
 	private List<Funcionario> funcionarios;
 
 	/** The url. */
 	@NotBlank(message = "A url do site ada empresa não pode ser vazio.")
-	@Pattern(regexp = "^(https?|http|ftp|file)://[-a-zA-Z0-9+&@#/%?=~_|!:,.;]*[-a-zA-Z0-9+&@#/%=~_|]", message = "A url do site da empresa está invalida.")
+	@Pattern(regexp = Regex.URL, message = "A url do site da empresa está invalida.")
 	private String url;
 
 	/**
