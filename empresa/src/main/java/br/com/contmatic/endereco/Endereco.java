@@ -16,6 +16,8 @@ import org.hibernate.validator.constraints.NotBlank;
 import br.com.contmatic.regex.Regex;
 
 /**
+ * The Class Endereco.
+ *
  * @author geovane.santos
  */
 
@@ -23,47 +25,92 @@ import br.com.contmatic.regex.Regex;
  * The Class Endereco.
  */
 public class Endereco {
+
+	/** The cidade. */
 	@Valid
 	@NotNull(message = "Os valores da cidade não pode ser nulo")
 	private Cidade cidade;
 
+	/** The numero. */
 	@Min(value = 1, message = "O número não deve ser negativo.")
 	private int numero;
 
+	/** The cep. */
 	@NotBlank(message = "O CEP não pode está vázio.")
 	@Pattern(regexp = Regex.CEP, message = "Digite um cep valido")
 	@Size(min = 8, max = 8, message = "O CEP deve ter 8 digitos.")
 	private String cep;
 
+	/**
+	 * Gets the cidade.
+	 *
+	 * @return the cidade
+	 */
 	public Cidade getCidade() {
 		return cidade;
 	}
 
+	/**
+	 * Sets the cidade.
+	 *
+	 * @param cidade the new cidade
+	 */
 	public void setCidade(Cidade cidade) {
 		this.cidade = cidade;
 	}
 
+	/**
+	 * Gets the numero.
+	 *
+	 * @return the numero
+	 */
 	public int getNumero() {
 		return numero;
 	}
 
+	/**
+	 * Sets the numero.
+	 *
+	 * @param numero the new numero
+	 */
 	public void setNumero(int numero) {
 		this.numero = numero;
 	}
 
+	/**
+	 * Gets the cep.
+	 *
+	 * @return the cep
+	 */
 	public String getCep() {
 		return cep;
 	}
 
+	/**
+	 * Sets the cep.
+	 *
+	 * @param cep the new cep
+	 */
 	public void setCep(String cep) {
 		this.cep = cep;
 	}
 
+	/**
+	 * Hash code.
+	 *
+	 * @return the int
+	 */
 	@Override
 	public int hashCode() {
 		return new HashCodeBuilder().append(this.cep).append(this.numero).toHashCode();
 	}
 
+	/**
+	 * Equals.
+	 *
+	 * @param obj the obj
+	 * @return true, if successful
+	 */
 	@Override
 	public boolean equals(Object obj) {
 		if (obj == null) {
@@ -80,6 +127,11 @@ public class Endereco {
 				.isEquals();
 	}
 
+	/**
+	 * To string.
+	 *
+	 * @return the string
+	 */
 	@Override
 	public String toString() {
 		return ToStringBuilder.reflectionToString(this, JSON_STYLE);
