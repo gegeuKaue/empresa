@@ -2,14 +2,16 @@ package br.com.contmatic.endereco;
 
 import static org.apache.commons.lang3.builder.ToStringStyle.JSON_STYLE;
 
+import java.util.List;
+
 import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 
 import org.apache.commons.lang3.builder.EqualsBuilder;
 import org.apache.commons.lang3.builder.HashCodeBuilder;
 import org.apache.commons.lang3.builder.ToStringBuilder;
 import org.hibernate.validator.constraints.Length;
 import org.hibernate.validator.constraints.NotBlank;
-
 
 /**
  * The Class Cidade.
@@ -26,25 +28,16 @@ public class Cidade {
 	private Estado estado;
 
 	/** The bairro. */
-	@NotBlank(message = "O Bairro da cidade não pode está vazio")
-	@Length(max = 500, message = "O bairro da cidade não deve ser maior que {max}")
-	private String bairro;
+	@NotNull(message = "O Bairro da cidade não pode está vazio")
+	@Size.List({ @Size(min = 1, message = "O bairro da cidade não deve ser vazio"),
+			@Size(max = 500, message = "O bairro limite da bairro da cidade é de {max}") })
+	private List<String> bairro;
 
-	/**
-	 * Gets the bairro.
-	 *
-	 * @return the bairro
-	 */
-	public String getBairro() {
+	public List<String> getBairro() {
 		return bairro;
 	}
 
-	/**
-	 * Sets the bairro.
-	 *
-	 * @param bairro the new bairro
-	 */
-	public void setBairro(String bairro) {
+	public void setBairro(List<String> bairro) {
 		this.bairro = bairro;
 	}
 
@@ -91,7 +84,7 @@ public class Cidade {
 	 */
 	@Override
 	public int hashCode() {
-		return HashCodeBuilder.reflectionHashCode(this);
+		return new HashCodeBuilder().append(this.nome).append(this.estado).hashCode();
 	}
 
 	/**
@@ -102,7 +95,18 @@ public class Cidade {
 	 */
 	@Override
 	public boolean equals(Object obj) {
-		return EqualsBuilder.reflectionEquals(this, obj);
+		if (obj == null) {
+			return false;
+		}
+		if (obj == this) {
+			return true;
+		}
+		if (obj.getClass() != getClass()) {
+			return false;
+		}
+		Cidade cidade = (Cidade) obj;
+		return new EqualsBuilder().append(this.nome, cidade.getNome()).append(this.estado, cidade.getEstado())
+				.isEquals();
 	}
 
 	/**

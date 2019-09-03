@@ -13,7 +13,7 @@ import org.apache.commons.lang3.builder.HashCodeBuilder;
 import org.apache.commons.lang3.builder.ToStringBuilder;
 import org.hibernate.validator.constraints.NotBlank;
 
-import br.com.contmatic.regex.Regex;
+import br.com.contmatic.regex.RegexType;
 
 /**
  * The Class Endereco.
@@ -37,7 +37,7 @@ public class Endereco {
 
 	/** The cep. */
 	@NotBlank(message = "O CEP não pode está vázio.")
-	@Pattern(regexp = Regex.CEP, message = "Digite um cep valido")
+	@Pattern(regexp = RegexType.CEP, message = "Digite um cep valido")
 	@Size(min = 8, max = 8, message = "O CEP deve ter 8 digitos.")
 	private String cep;
 

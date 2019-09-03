@@ -1,5 +1,8 @@
 package br.com.contmatic.fixture;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import br.com.contmatic.endereco.Cidade;
 import br.com.contmatic.endereco.Estado;
 import br.com.six2six.fixturefactory.Fixture;
@@ -12,8 +15,15 @@ public class FixtureCidade {
 				add("nome", random("Rua Sardônica", "Rua Farrapos", "Rua Duque de Caxias", "Rua Planalto",
 						"Rua Jaguariun", "Rua Pacaembu"));
 				add("estado", Estado.SP);
-				add("bairro", random("Estância Paraíso", "Vila Bartira", "Parque Recanto Mônica", "Jardim Anita",
-						"Jardim Gonçalves", "Jardim Zélia", "Parque Novo Horizonte"));
+				List<String> bairros = new ArrayList<String>();
+				bairros.add("Estância Paraíso");
+				bairros.add("Vila Bartira");
+				bairros.add("Parque Recanto Mônica");
+				bairros.add("Jardim Anita");
+				bairros.add("Jardim Gonçalves");
+				bairros.add("Jardim Zélia");
+				bairros.add("Parque Novo Horizonte");
+				add("bairro", bairros);
 			}
 		});
 	}

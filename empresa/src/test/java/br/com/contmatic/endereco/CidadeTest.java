@@ -1,10 +1,13 @@
 package br.com.contmatic.endereco;
 
 import static com.google.code.beanmatchers.BeanMatchers.hasValidGettersAndSetters;
+import static org.hamcrest.CoreMatchers.containsString;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertThat;
 import static org.junit.Assert.assertTrue;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Set;
 
 import javax.validation.ConstraintViolation;
@@ -45,12 +48,12 @@ public class CidadeTest {
 
 	@Test
 	public void deve_respeitar_hash_code() {
-		assertThat(CLASSE, BeanMatchers.hasValidBeanHashCode());
+		assertThat(CLASSE, BeanMatchers.hasValidBeanHashCodeFor("nome","estado"));
 	}
 
 	@Test
 	public void deve_respeitar_equals() {
-		assertThat(CLASSE, BeanMatchers.hasValidBeanEquals());
+		assertThat(CLASSE, BeanMatchers.hasValidBeanEqualsFor("nome","estado"));
 	}
 
 	@Test
@@ -72,6 +75,22 @@ public class CidadeTest {
 	}
 
 	@Test
+	public void nao_deve_aceitar_nome_com_mais_500() {
+		cidade.setNome(RandomStringUtils.randomAlphabetic(502));
+		assertFalse(isValid(cidade, "Nome da cidade não deve ser maior que 500"));
+	}
+
+	@Test
+	public void nao_deve_aceitar_lista_de_bairro_com_mais_500_bairro() {
+		List<String> bairros = new ArrayList<String>();
+		for (int i = 0; i < 533; i++) {
+			bairros.add("Res. Flamboyant");
+		}
+		cidade.setBairro(bairros);
+		assertFalse(isValid(cidade, "O bairro limite da bairro da cidade é de 500"));
+	}
+
+	@Test
 	public void nao_deve_aceitar_estado_nulo() {
 		cidade.setEstado(null);
 		assertFalse(isValid(cidade, "Nome do estado não pode ser nulo."));
@@ -85,7 +104,7 @@ public class CidadeTest {
 
 	@Test
 	public void nao_deve_aceitar_bairro_vazio() {
-		cidade.setBairro("");
+		cidade.setBairro(null);
 		assertTrue(isValid(cidade, "O Bairro da cidade não pode está vazios"));
 	}
 
@@ -96,15 +115,30 @@ public class CidadeTest {
 	}
 
 	@Test
-	public void nao_deve_aceitar_bairro_com_mais_de_500() {
-		cidade.setBairro(RandomStringUtils.randomAlphanumeric(501));
-		assertFalse(isValid(cidade, "O bairro da cidade não deve ser maior que 500"));
+	public void nao_deve_aceitar_bairro_vazia() {
+		cidade.setBairro(new ArrayList<String>());
+		assertTrue(isValid(cidade, "O Bairro da cidade não pode está vazios"));
 	}
 
 	@Test
 	public void nao_deve_aceitar_nome_aceitar_mais_de_500_caracteres() {
 		cidade.setNome(RandomStringUtils.randomAlphanumeric(501));
 		assertFalse(isValid(cidade, "Nome da cidade não deve ser maior que 500"));
+	}
+	
+	@Test
+	public void deve_conter_o_valor_nome_no_toString() {
+		assertThat(new Cidade().toString(), containsString("nome"));
+	}
+	
+	@Test
+	public void deve_conter_o_valor_estado_no_toString() {
+		assertThat(new Cidade().toString(), containsString("estado"));
+	}
+
+	@Test
+	public void deve_conter_o_valor_bairro_no_toString() {
+		assertThat(new Cidade().toString(), containsString("estado"));
 	}
 
 	public boolean isValid(Cidade cidade, String mensagem) {
@@ -114,6 +148,9 @@ public class CidadeTest {
 		for (ConstraintViolation<Cidade> constraintViolation : restricoes)
 			if (constraintViolation.getMessage().equalsIgnoreCase(mensagem))
 				valido = false;
+		for (ConstraintViolation<Cidade> constraintViolation : restricoes) {
+			System.out.println(constraintViolation.getMessage());
+		}
 		return valido;
 	}
 }

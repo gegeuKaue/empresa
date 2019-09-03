@@ -19,7 +19,7 @@ import org.joda.time.LocalDate;
 import org.joda.time.LocalTime;
 
 import br.com.caelum.stella.bean.validation.CPF;
-import br.com.contmatic.regex.Regex;
+import br.com.contmatic.regex.RegexType;
 import br.com.contmatic.telefone.Telefone;
 
 /**
@@ -31,7 +31,7 @@ public class Funcionario {
 	/** The nome. */
 	@NotBlank(message = "O nome do funcionario não deve ser vázio.")
 	@Length(max = 500, message = "O nome máximo de funcionario é de {max} caracteres")
-	@Pattern(regexp = Regex.NOME, message = "O nome do funcionário está incorreto")
+	@Pattern(regexp = RegexType.NOME, message = "O nome do funcionário está incorreto")
 	private String nome;
 
 	/** The cargo. */

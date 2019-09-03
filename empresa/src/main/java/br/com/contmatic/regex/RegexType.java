@@ -3,7 +3,7 @@ package br.com.contmatic.regex;
 /**
  * The Class Regex.
  */
-public class Regex {
+public final class RegexType {
 
 	/** The Constant URL. */
 	public static final String URL = "^(https?|http|ftp|file)://[-a-zA-Z0-9+&@#/%?=~_|!:,.;]*[-a-zA-Z0-9+&@#/%=~_|]";
@@ -13,4 +13,8 @@ public class Regex {
 
 	/** The Constant CEP. */
 	public static final String CEP = "\\d+";
+
+	private RegexType() {
+
+	}
 }

@@ -19,7 +19,7 @@ import org.hibernate.validator.constraints.NotBlank;
 
 import br.com.caelum.stella.bean.validation.CNPJ;
 import br.com.contmatic.endereco.Endereco;
-import br.com.contmatic.regex.Regex;
+import br.com.contmatic.regex.RegexType;
 import br.com.contmatic.telefone.Telefone;
 
 /**
@@ -34,7 +34,7 @@ public class Empresa {
 	/** The nome. */
 	@NotBlank(message = "O nome da empresa não pode ser nulo.")
 	@Length(max = 100, message = "O nome da empresa deve ter {max} caracteres")
-	@Pattern(regexp = Regex.NOME, message = "O nome da empresa está incorreto")
+	@Pattern(regexp = RegexType.NOME, message = "O nome da empresa está incorreto")
 	private String nome;
 
 	/** The email. */
@@ -71,7 +71,7 @@ public class Empresa {
 
 	/** The url. */
 	@NotBlank(message = "A url do site ada empresa não pode ser vazio.")
-	@Pattern(regexp = Regex.URL, message = "A url do site da empresa está invalida.")
+	@Pattern(regexp = RegexType.URL, message = "A url do site da empresa está invalida.")
 	private String url;
 
 	/**

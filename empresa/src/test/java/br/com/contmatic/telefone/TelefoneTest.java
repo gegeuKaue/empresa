@@ -6,6 +6,7 @@ import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertThat;
 import static org.junit.Assert.assertTrue;
 
+import java.util.HashSet;
 import java.util.Set;
 
 import javax.validation.ConstraintViolation;
@@ -115,6 +116,20 @@ public class TelefoneTest {
 	@Test
 	public void deve_conter_o_valor_numero_no_toString() {
 		assertThat(new Telefone().toString(), containsString("numero"));
+	}
+
+	@Test
+	public void nao_deve_adicionar_telefone_iguais() {
+		Set<Telefone> telefones = new HashSet<Telefone>();
+		Telefone telefone = new Telefone();
+		telefone.setNumero("985191606");
+
+		Telefone telefone2 = new Telefone();
+		telefone2.setNumero("985191606");
+
+		telefones.add(telefone);
+		telefones.add(telefone2);
+		assertTrue(telefones.size() == 1);
 	}
 
 	public boolean isValid(Telefone telefone, String mensagem) {

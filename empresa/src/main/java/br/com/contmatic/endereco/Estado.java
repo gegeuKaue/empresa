@@ -114,15 +114,6 @@ public enum Estado {
 		return nomeEstado;
 	}
 
-	/**
-	 * Sets the nome estado.
-	 *
-	 * @param nomeEstado the new nome estado
-	 */
-	public void setNomeEstado(String nomeEstado) {
-		this.nomeEstado = nomeEstado;
-	}
-
 	@Override
 	public String toString() {
 		return ToStringBuilder.reflectionToString(this, ToStringStyle.JSON_STYLE);
