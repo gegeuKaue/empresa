@@ -16,5 +16,5 @@ import br.com.contmatic.telefone.TelefoneTest;
 @SuiteClasses({ EmpresaTest.class, FuncionarioTest.class, TelefoneTest.class, EnderecoTest.class, EstadoTest.class,
 		TelefoneDDDTest.class, CidadeTest.class })
 public class TestRunners {
-
+	
 }
