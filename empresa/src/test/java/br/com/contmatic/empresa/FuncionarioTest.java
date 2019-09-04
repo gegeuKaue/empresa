@@ -132,6 +132,12 @@ public class FuncionarioTest {
 	}
 
 	@Test
+	public void nao_deve_aceitar_cargo_com_mais_500() {
+		funcionario.setCargo(RandomStringUtils.randomAlphabetic(600));
+		assertFalse(isValid(funcionario, "O cargo máximo de funcionario é de 500 caracteres"));
+	}
+
+	@Test
 	public void deve_aceitar_cargo_valido() {
 		funcionario.setCargo("estagiario");
 		assertTrue(isValid(funcionario, "O cargo do funcionario não deve ser vázio."));
@@ -347,6 +353,12 @@ public class FuncionarioTest {
 	}
 
 	@Test
+	public void nao_deve_aceitar_email_com_mais_de_500_caracteres() {
+		funcionario.setEmail("A@" + RandomStringUtils.randomAlphabetic(500) + ".com");
+		assertFalse(isValid(funcionario, "O e-mail do funcionario deve ter no máximo 500 caracteres"));
+	}
+
+	@Test
 	public void nao_deve_aceitar_email_com_2_arroba() {
 		funcionario.setEmail("A@@gmail.com");
 		assertFalse(isValid(funcionario, "O email do funcionario está invalido."));
@@ -361,6 +373,30 @@ public class FuncionarioTest {
 	@Test
 	public void nao_deve_aceitar_email_com_ponto_no_comeco() {
 		funcionario.setEmail(".a@gmail.com");
+		assertFalse(isValid(funcionario, "O email do funcionario está invalido."));
+	}
+
+	@Test
+	public void nao_deve_aceitar_email_com_ponto_no_final() {
+		funcionario.setEmail("a@gmail.com.");
+		assertFalse(isValid(funcionario, "O email do funcionario está invalido."));
+	}
+
+	@Test
+	public void deve_aceitar_email_com_dorminio_brasileiro() {
+		funcionario.setEmail("a@gmail.com.br");
+		assertTrue(isValid(funcionario, "O email do funcionario está invalido."));
+	}
+
+	@Test
+	public void nao_deve_aceitar_email_com_arroba_separado() {
+		funcionario.setEmail("aa@a@gmail.com.br");
+		assertFalse(isValid(funcionario, "O email do funcionario está invalido."));
+	}
+
+	@Test
+	public void nao_deve_aceitar_email_com_ponto_virgula() {
+		funcionario.setEmail("a@gmail;com;br");
 		assertFalse(isValid(funcionario, "O email do funcionario está invalido."));
 	}
 
@@ -422,9 +458,6 @@ public class FuncionarioTest {
 		for (ConstraintViolation<Funcionario> constraintViolation : restricoes)
 			if (constraintViolation.getMessage().equalsIgnoreCase(mensagem))
 				valido = false;
-		for (ConstraintViolation<Funcionario> constraintViolation : restricoes) {
-			System.out.println(constraintViolation.getMessage());
-		}
 		return valido;
 	}
 

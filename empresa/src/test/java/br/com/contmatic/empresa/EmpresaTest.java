@@ -66,7 +66,13 @@ public class EmpresaTest {
 	@Test
 	public void deve_aceitar_nome_valido() {
 		empresa.setNome("Contmatic");
-		assertTrue(isValid(empresa, "O nome da empresa deve ser entre 1 e 100"));
+		assertTrue(isValid(empresa, "O nome da empresa deve ter 100 caracteres"));
+	}
+
+	@Test
+	public void nao_deve_aceitar_nome_com_mais_de_100() {
+		empresa.setNome(RandomStringUtils.randomAlphanumeric(105));
+		assertFalse(isValid(empresa, "O nome da empresa deve ter 100 caracteres"));
 	}
 
 	@Test
@@ -124,7 +130,13 @@ public class EmpresaTest {
 	}
 
 	@Test
-	public void nao_deve_ter_lista_de_fincionario_vazia() {
+	public void nao_deve_aceitar_email_com_mais_de_500_caracteres() {
+		empresa.setEmail("A@" + RandomStringUtils.randomAlphabetic(500) + ".com");
+		assertFalse(isValid(empresa, "O e-mail da empresa deve ter no máximo 500 caracteres"));
+	}
+
+	@Test
+	public void nao_deve_ter_lista_de_funcionario_vazia() {
 		empresa.setFuncionarios(new ArrayList<Funcionario>());
 		assertFalse(isValid(empresa, "Não tem nenhum funcionario cadastrado na empresa."));
 	}
@@ -193,6 +205,30 @@ public class EmpresaTest {
 	public void nao_deve_aceitar_email_vazio() {
 		empresa.setEmail("");
 		assertFalse(isValid(empresa, "O email da empresa não pode ser nulo"));
+	}
+
+	@Test
+	public void nao_deve_aceitar_email_com_ponto_no_final() {
+		empresa.setEmail("a@gmail.com.");
+		assertFalse(isValid(empresa, "O email da empresa está inválido"));
+	}
+
+	@Test
+	public void deve_aceitar_email_com_dorminio_brasileiro() {
+		empresa.setEmail("a@gmail.com.br");
+		assertTrue(isValid(empresa, "O email da empresa está inválido"));
+	}
+
+	@Test
+	public void nao_deve_aceitar_email_com_arroba_separado() {
+		empresa.setEmail("aa@a@gmail.com.br");
+		assertFalse(isValid(empresa, "O email da empresa está inválido"));
+	}
+
+	@Test
+	public void nao_deve_aceitar_email_com_ponto_virgula() {
+		empresa.setEmail("a@gmail;com;br");
+		assertFalse(isValid(empresa, "O email da empresa está inválido"));
 	}
 
 	@Test
