@@ -4,6 +4,7 @@ import static com.google.code.beanmatchers.BeanMatchers.hasValidBeanEqualsFor;
 import static com.google.code.beanmatchers.BeanMatchers.hasValidBeanHashCodeFor;
 import static com.google.code.beanmatchers.BeanMatchers.hasValidGettersAndSetters;
 import static org.hamcrest.CoreMatchers.containsString;
+import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertThat;
 import static org.junit.Assert.assertTrue;
@@ -19,12 +20,15 @@ import javax.validation.Validation;
 import javax.validation.Validator;
 import javax.validation.ValidatorFactory;
 
+import org.apache.commons.lang3.RandomStringUtils;
 import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
+import br.com.contmatic.endereco.Endereco;
 import br.com.contmatic.fixture.FixtureEmpresa;
 import br.com.contmatic.telefone.Telefone;
+import br.com.contmatic.telefone.TelefoneDDD;
 import br.com.six2six.fixturefactory.Fixture;
 
 public class EmpresaTest {
@@ -134,13 +138,13 @@ public class EmpresaTest {
 	}
 
 	@Test
-	public void nao_deve_ter_lista_de_fincionario_com_mais_de_100000() {
+	public void nao_deve_ter_lista_de_fincionario_com_mais_de_1000() {
 		List<Funcionario> funcionarios = new LinkedList<Funcionario>();
-		for (int i = 0; i <= 10005; i++) {
+		for (int i = 0; i <= 1005; i++) {
 			funcionarios.add(Fixture.from(Funcionario.class).gimme("funcionario"));
 		}
 		empresa.setFuncionarios(funcionarios);
-		assertFalse(isValid(empresa, "O número máximo de funcionario da empresa é de 10000"));
+		assertFalse(isValid(empresa, "O número máximo de funcionario da empresa é de 1000"));
 	}
 
 	@Test
@@ -278,6 +282,99 @@ public class EmpresaTest {
 	}
 
 	@Test
+	public void nao_deve_aceitar_enderecos_vazio() {
+		empresa.setEnderecos(new HashSet<Endereco>());
+		assertFalse(isValid(empresa, "O telefone da empresa não pode ser nulo"));
+	}
+
+	@Test
+	public void nao_deve_aceitar_enderecos_iguais() {
+		Set<Endereco> enderecos = new HashSet<Endereco>();
+		Endereco end = new Endereco();
+		end.setCep("08588145");
+		end.setNumero(367);
+
+		Endereco end2 = new Endereco();
+		end2.setCep("08588145");
+		end2.setNumero(367);
+
+		enderecos.add(end);
+		enderecos.add(end2);
+
+		empresa.setEnderecos(enderecos);
+		assertThat(empresa.getEnderecos().size(), is(1));
+	}
+
+	@Test
+	public void deve_aceitar_enderecos_diferente() {
+		Set<Endereco> enderecos = new HashSet<Endereco>();
+		Endereco end = new Endereco();
+		end.setCep("08588145");
+		end.setNumero(367);
+
+		Endereco end2 = new Endereco();
+		end2.setCep("08588456");
+		end2.setNumero(37);
+
+		enderecos.add(end);
+		enderecos.add(end2);
+
+		empresa.setEnderecos(enderecos);
+		assertThat(empresa.getEnderecos().size(), is(2));
+	}
+
+	@Test
+	public void nao_deve_aceitar_enderecos_acima_de_50() {
+		Set<Endereco> enderecos = new HashSet<Endereco>();
+		Endereco end = new Endereco();
+
+		for (int i = 0; i < 58; i++) {
+			end.setCep("08588145");
+			end.setNumero(i);
+			enderecos.add(end);
+		}
+
+		empresa.setEnderecos(enderecos);
+		assertFalse(isValid(empresa, "A lista de endereço máxima é de 50"));
+	}
+
+	@Test
+	public void deve_aceitar_enderecos_com_mesmo_cep_e_numero_diferente() {
+		Set<Endereco> enderecos = new HashSet<Endereco>();
+		Endereco end = new Endereco();
+		end.setCep("08588145");
+		end.setNumero(367);
+
+		Endereco end2 = new Endereco();
+		end2.setCep("08588145");
+		end2.setNumero(37);
+
+		enderecos.add(end);
+		enderecos.add(end2);
+
+		empresa.setEnderecos(enderecos);
+		assertThat(empresa.getEnderecos().size(), is(2));
+	}
+
+	@Test
+	public void deve_aceitar_enderecos_com_o_cep_diferente_e_numero_igual() {
+		Set<Endereco> enderecos = new HashSet<Endereco>();
+		Endereco end = new Endereco();
+		end.setCep("088888888");
+		end.setNumero(367);
+
+		Endereco end2 = new Endereco();
+		end2.setCep("08588145");
+		end2.setNumero(367);
+
+		enderecos.add(end);
+		enderecos.add(end2);
+
+		empresa.setEnderecos(enderecos);
+		assertThat(empresa.getEnderecos().size(), is(2));
+	}
+
+	@Test
 	public void nao_deve_aceitar_url_nula() {
 		empresa.setUrl(null);
 		assertFalse(isValid(empresa, "A url do site ada empresa não pode ser vazio."));
@@ -332,6 +429,19 @@ public class EmpresaTest {
 	}
 
 	@Test
+	public void nao_deve_aceitar_mais_de_telefones_500() {
+		Telefone telefone = new Telefone();
+		telefone.setDdd(TelefoneDDD.DDD11);
+		Set<Telefone> telefones = new HashSet<Telefone>();
+		for (int i = 0; i < 505; i++) {
+			telefone.setNumero("9" + RandomStringUtils.randomNumeric(8));
+			telefones.add(telefone);
+		}
+		empresa.setTelefones(telefones);
+		assertFalse(isValid(empresa, "A lista de telefone da empresa máxima é de 500."));
+	}
+
+	@Test
 	public void nao_deve_aceitar_url_sem_www() {
 		empresa.setUrl("http://contmatic.com.");
 		assertFalse(isValid(empresa, "A url do site da empresa está invalida."));
@@ -341,6 +451,66 @@ public class EmpresaTest {
 	public void nao_deve_aceitar_telefones_nulos() {
 		empresa.setTelefones(null);
 		assertFalse(isValid(empresa, "O telefone da empresa não pode ser nulo"));
+	}
+
+	@Test
+	public void nao_deve_aceitar_telefones_vazio() {
+		empresa.setTelefones(new HashSet<Telefone>());
+		assertFalse(isValid(empresa, "A lista de telefone da empresa não deve ser vazio."));
+	}
+
+	@Test
+	public void nao_deve_aceitar_telefones_iguais() {
+		Set<Telefone> telefones = new HashSet<Telefone>();
+		Telefone telefone = new Telefone();
+		telefone.setDdd(TelefoneDDD.DDD11);
+		telefone.setNumero("985191606");
+
+		Telefone telefone2 = new Telefone();
+		telefone2.setDdd(TelefoneDDD.DDD11);
+		telefone2.setNumero("985191606");
+
+		telefones.add(telefone);
+		telefones.add(telefone2);
+
+		empresa.setTelefones(telefones);
+		assertThat(empresa.getTelefones().size(), is(1));
+	}
+
+	@Test
+	public void deve_aceitar_telefones_com_ddd_diferente() {
+		Set<Telefone> telefones = new HashSet<Telefone>();
+		Telefone telefone = new Telefone();
+		telefone.setDdd(TelefoneDDD.DDD11);
+		telefone.setNumero("985191606");
+
+		Telefone telefone2 = new Telefone();
+		telefone2.setDdd(TelefoneDDD.DDD13);
+		telefone2.setNumero("985191606");
+
+		telefones.add(telefone);
+		telefones.add(telefone2);
+
+		empresa.setTelefones(telefones);
+		assertThat(empresa.getTelefones().size(), is(2));
+	}
+
+	@Test
+	public void deve_aceitar_telefones_com_o_numero_diferente() {
+		Set<Telefone> telefones = new HashSet<Telefone>();
+		Telefone telefone = new Telefone();
+		telefone.setDdd(TelefoneDDD.DDD11);
+		telefone.setNumero("985191606");
+
+		Telefone telefone2 = new Telefone();
+		telefone2.setDdd(TelefoneDDD.DDD11);
+		telefone2.setNumero("985191617");
+
+		telefones.add(telefone);
+		telefones.add(telefone2);
+
+		empresa.setTelefones(telefones);
+		assertThat(empresa.getTelefones().size(), is(2));
 	}
 
 	@Test
@@ -385,6 +555,7 @@ public class EmpresaTest {
 		for (ConstraintViolation<Empresa> constraintViolation : restricoes)
 			if (constraintViolation.getMessage().equalsIgnoreCase(mensagem))
 				valido = false;
+
 		return valido;
 	}
 }

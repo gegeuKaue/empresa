@@ -148,9 +148,6 @@ public class CidadeTest {
 		for (ConstraintViolation<Cidade> constraintViolation : restricoes)
 			if (constraintViolation.getMessage().equalsIgnoreCase(mensagem))
 				valido = false;
-		for (ConstraintViolation<Cidade> constraintViolation : restricoes) {
-			System.out.println(constraintViolation.getMessage());
-		}
 		return valido;
 	}
 }

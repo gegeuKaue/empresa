@@ -241,30 +241,12 @@ public enum TelefoneDDD {
 	}
 
 	/**
-	 * Sets the regiao.
-	 *
-	 * @param regiao the new regiao
-	 */
-	public void setRegiao(String regiao) {
-		this.regiao = regiao;
-	}
-
-	/**
 	 * Gets the ddd.
 	 *
 	 * @return the ddd
 	 */
 	public int getDdd() {
 		return ddd;
-	}
-
-	/**
-	 * Sets the ddd.
-	 *
-	 * @param ddd the new ddd
-	 */
-	public void setDdd(int ddd) {
-		this.ddd = ddd;
 	}
 
 	/**
@@ -277,5 +259,4 @@ public enum TelefoneDDD {
 		return ToStringBuilder.reflectionToString(this, ToStringStyle.JSON_STYLE);
 	}
 
-	
 }

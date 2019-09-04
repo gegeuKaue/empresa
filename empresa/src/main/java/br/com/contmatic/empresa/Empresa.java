@@ -58,14 +58,14 @@ public class Empresa {
 	/** The telefones. */
 	@Valid
 	@NotNull(message = "O telefone da empresa não pode ser nulo")
-	@Size.List({ @Size(min = 1, message = "A lista de endereço da empresa não deve ser vazio."),
-			@Size(max = 5000, message = "A lista de endereço da empresa máxima é de {max}.") })
+	@Size.List({ @Size(min = 1, message = "A lista de telefone da empresa não deve ser vazio."),
+			@Size(max = 500, message = "A lista de telefone da empresa máxima é de {max}.") })
 	private Set<Telefone> telefones;
 
 	/** The lista funcionario. */
 	@Valid
 	@NotNull(message = "Os funcionários da empresa está nulo.")
-	@Size.List({ @Size(max = 10000, message = "O número máximo de funcionario da empresa é de {max}"),
+	@Size.List({ @Size(max = 1000, message = "O número máximo de funcionario da empresa é de {max}"),
 			@Size(min = 1, message = "Não tem nenhum funcionario cadastrado na empresa.") })
 	private List<Funcionario> funcionarios;
 

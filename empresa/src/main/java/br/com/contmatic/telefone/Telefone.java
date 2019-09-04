@@ -73,7 +73,7 @@ public class Telefone {
 	 */
 	@Override
 	public int hashCode() {
-		return HashCodeBuilder.reflectionHashCode(this);
+		return new HashCodeBuilder().append(this.ddd).append(this.numero).hashCode();
 	}
 
 	/**
@@ -84,7 +84,18 @@ public class Telefone {
 	 */
 	@Override
 	public boolean equals(Object obj) {
-		return EqualsBuilder.reflectionEquals(this, obj);
+		if (obj == null) {
+			return false;
+		}
+		if (obj == this) {
+			return true;
+		}
+		if (obj.getClass() != getClass()) {
+			return false;
+		}
+		Telefone telefone = (Telefone) obj;
+		return new EqualsBuilder().append(this.ddd, telefone.getDdd()).append(this.numero, telefone.getNumero())
+				.isEquals();
 	}
 
 	/**

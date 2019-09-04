@@ -7,6 +7,7 @@ import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Past;
 import javax.validation.constraints.Pattern;
+import javax.validation.constraints.Size;
 
 import org.apache.commons.lang3.builder.EqualsBuilder;
 import org.apache.commons.lang3.builder.HashCodeBuilder;
@@ -63,6 +64,8 @@ public class Funcionario {
 	/** The telefone. */
 	@Valid
 	@NotNull(message = "O telefone do funcionario não pode ser nulo")
+	@Size.List({ @Size(min = 1, message = "A lista de endereço do funcionario não deve ser vazio."),
+			@Size(max = 500, message = "A lista de endereço do funcionario máxima é de {max}.") })
 	private Set<Telefone> telefones;
 
 	/** The email. */

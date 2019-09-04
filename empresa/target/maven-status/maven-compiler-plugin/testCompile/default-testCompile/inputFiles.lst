@@ -1,11 +1,13 @@
 U:\git\repository\empresa\src\test\java\br\com\contmatic\telefone\TelefoneTest.java
+U:\git\repository\empresa\src\test\java\br\com\contmatic\fixture\FixtureEndereco.java
+U:\git\repository\empresa\src\test\java\br\com\contmatic\telefone\TelefoneDDDTest.java
+U:\git\repository\empresa\src\test\java\br\com\contmatic\fixture\FixtureEmpresa.java
+U:\git\repository\empresa\src\test\java\br\com\contmatic\endereco\CidadeTest.java
 U:\git\repository\empresa\src\test\java\br\com\contmatic\empresa\EmpresaTest.java
 U:\git\repository\empresa\src\test\java\br\com\contmatic\fixture\FixtureCidade.java
-U:\git\repository\empresa\src\test\java\br\com\contmatic\fixture\FixtureEndereco.java
 U:\git\repository\empresa\src\test\java\br\com\contmatic\fixture\FixtureFuncionario.java
 U:\git\repository\empresa\src\test\java\br\com\contmatic\runners\TestRunners.java
-U:\git\repository\empresa\src\test\java\br\com\contmatic\fixture\FixtureEmpresa.java
+U:\git\repository\empresa\src\test\java\br\com\contmatic\endereco\EstadoTest.java
 U:\git\repository\empresa\src\test\java\br\com\contmatic\endereco\EnderecoTest.java
 U:\git\repository\empresa\src\test\java\br\com\contmatic\fixture\FixtureTelefone.java
-U:\git\repository\empresa\src\test\java\br\com\contmatic\endereco\CidadeTest.java
 U:\git\repository\empresa\src\test\java\br\com\contmatic\empresa\FuncionarioTest.java

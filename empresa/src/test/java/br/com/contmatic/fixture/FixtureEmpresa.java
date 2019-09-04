@@ -44,10 +44,4 @@ public class FixtureEmpresa {
 			}
 		});
 	}
-
-	public static void main(String[] args) {
-		fixture();
-		Empresa empresa = Fixture.from(Empresa.class).gimme("empresa");
-		System.out.println(empresa);
-	}
 }

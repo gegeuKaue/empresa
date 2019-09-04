@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" ?>
-<testsuite tests="15" failures="0" name="br.com.contmatic.telefone.TelefoneTest" time="0" errors="0" skipped="0">
+<testsuite tests="6" failures="0" name="br.com.contmatic.telefone.TelefoneDDDTest" time="0" errors="0" skipped="0">
   <properties>
     <property name="java.runtime.name" value="Java(TM) SE Runtime Environment"/>
     <property name="sun.boot.library.path" value="C:\Program Files\Java\jdk1.8.0_191\jre\bin"/>
@@ -64,19 +64,10 @@
     <property name="sun.desktop" value="windows"/>
     <property name="sun.cpu.isalist" value="amd64"/>
   </properties>
-  <testcase classname="br.com.contmatic.telefone.TelefoneTest" name="nao_deve_aceitar_numero_vazio" time="0"/>
-  <testcase classname="br.com.contmatic.telefone.TelefoneTest" name="nao_deve_aceitar_numero_com_letra" time="0"/>
-  <testcase classname="br.com.contmatic.telefone.TelefoneTest" name="deve_conter_o_valor_ddd_no_toString" time="0"/>
-  <testcase classname="br.com.contmatic.telefone.TelefoneTest" name="nao_deve_aceitar_ddd_vazio" time="0"/>
-  <testcase classname="br.com.contmatic.telefone.TelefoneTest" name="deve_respeitar_hash_code" time="0"/>
-  <testcase classname="br.com.contmatic.telefone.TelefoneTest" name="deve_aceitar_ddd_valido" time="0"/>
-  <testcase classname="br.com.contmatic.telefone.TelefoneTest" name="deve_respeitar_equals" time="0"/>
-  <testcase classname="br.com.contmatic.telefone.TelefoneTest" name="nao_deve_aceitar_numero_que_nao_comeca_com_9" time="0"/>
-  <testcase classname="br.com.contmatic.telefone.TelefoneTest" name="nao_deve_aceitar_numero_numeros_com_mais_de_9_numero" time="0"/>
-  <testcase classname="br.com.contmatic.telefone.TelefoneTest" name="deve_respeitar_os_get_set" time="0"/>
-  <testcase classname="br.com.contmatic.telefone.TelefoneTest" name="nao_deve_aceitar_numero_null" time="0"/>
-  <testcase classname="br.com.contmatic.telefone.TelefoneTest" name="deve_conter_o_valor_numero_no_toString" time="0"/>
-  <testcase classname="br.com.contmatic.telefone.TelefoneTest" name="nao_deve_aceitar_numero_numeros_com_menos_de_9_numero" time="0"/>
-  <testcase classname="br.com.contmatic.telefone.TelefoneTest" name="nao_deve_adicionar_telefone_iguais" time="0"/>
-  <testcase classname="br.com.contmatic.telefone.TelefoneTest" name="deve_aceitar_numero_valido" time="0"/>
+  <testcase classname="br.com.contmatic.telefone.TelefoneDDDTest" name="deve_conter_o_valor_do_ddd_no_toString" time="0"/>
+  <testcase classname="br.com.contmatic.telefone.TelefoneDDDTest" name="deve_conter_o_valor_regiao_no_toString" time="0"/>
+  <testcase classname="br.com.contmatic.telefone.TelefoneDDDTest" name="deve_retornar_um_TelefoneDDD_pela_sigla" time="0"/>
+  <testcase classname="br.com.contmatic.telefone.TelefoneDDDTest" name="deve_retornar_um_TelefoneDDD_com_nome_por_extenso" time="0"/>
+  <testcase classname="br.com.contmatic.telefone.TelefoneDDDTest" name="deve_conter_o_valor_name_no_toString" time="0"/>
+  <testcase classname="br.com.contmatic.telefone.TelefoneDDDTest" name="deve_retornar_um_TelefoneDDD_com_ddd" time="0"/>
 </testsuite>

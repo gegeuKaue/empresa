@@ -19,10 +19,4 @@ public class FixtureEndereco {
 			}
 		});
 	}
-
-	public static void main(String[] args) {
-		fixture();
-		Endereco endereco = Fixture.from(Endereco.class).gimme("endereco");
-		System.out.println(endereco.toString());
-	}
 }

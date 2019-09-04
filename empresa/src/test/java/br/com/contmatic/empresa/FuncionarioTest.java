@@ -4,6 +4,7 @@ import static com.google.code.beanmatchers.BeanMatchers.hasValidBeanEqualsFor;
 import static com.google.code.beanmatchers.BeanMatchers.hasValidBeanHashCodeFor;
 import static com.google.code.beanmatchers.BeanMatchers.hasValidGettersAndSetters;
 import static org.hamcrest.CoreMatchers.containsString;
+import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertThat;
 import static org.junit.Assert.assertTrue;
@@ -16,6 +17,7 @@ import javax.validation.Validation;
 import javax.validation.Validator;
 import javax.validation.ValidatorFactory;
 
+import org.apache.commons.lang3.RandomStringUtils;
 import org.joda.time.LocalDate;
 import org.joda.time.LocalTime;
 import org.junit.Before;
@@ -27,6 +29,7 @@ import com.google.code.beanmatchers.ValueGenerator;
 
 import br.com.contmatic.fixture.FixtureFuncionario;
 import br.com.contmatic.telefone.Telefone;
+import br.com.contmatic.telefone.TelefoneDDD;
 import br.com.six2six.fixturefactory.Fixture;
 
 public class FuncionarioTest {
@@ -265,6 +268,79 @@ public class FuncionarioTest {
 	}
 
 	@Test
+	public void nao_deve_aceitar_telefones_vazio() {
+		funcionario.setTelefones(new HashSet<Telefone>());
+		assertFalse(isValid(funcionario, "A lista de endereço do funcionario não deve ser vazio."));
+	}
+
+	@Test
+	public void nao_deve_aceitar_telefones_iguais() {
+		Set<Telefone> telefones = new HashSet<Telefone>();
+		Telefone telefone = new Telefone();
+		telefone.setDdd(TelefoneDDD.DDD11);
+		telefone.setNumero("985191606");
+
+		Telefone telefone2 = new Telefone();
+		telefone2.setDdd(TelefoneDDD.DDD11);
+		telefone2.setNumero("985191606");
+
+		telefones.add(telefone);
+		telefones.add(telefone2);
+
+		funcionario.setTelefones(telefones);
+		assertThat(funcionario.getTelefones().size(), is(1));
+	}
+
+	@Test
+	public void nao_deve_aceitar_mais_de_telefones_500() {
+		Telefone telefone = new Telefone();
+		telefone.setDdd(TelefoneDDD.DDD11);
+		Set<Telefone> telefones = new HashSet<Telefone>();
+		for (int i = 0; i < 505; i++) {
+			telefone.setNumero("9" + RandomStringUtils.randomNumeric(8));
+			telefones.add(telefone);
+		}
+		funcionario.setTelefones(telefones);
+		assertFalse(isValid(funcionario, "A lista de endereço do funcionario máxima é de 500."));
+	}
+
+	@Test
+	public void deve_aceitar_telefones_com_ddd_diferente() {
+		Set<Telefone> telefones = new HashSet<Telefone>();
+		Telefone telefone = new Telefone();
+		telefone.setDdd(TelefoneDDD.DDD11);
+		telefone.setNumero("985191606");
+
+		Telefone telefone2 = new Telefone();
+		telefone2.setDdd(TelefoneDDD.DDD13);
+		telefone2.setNumero("985191606");
+
+		telefones.add(telefone);
+		telefones.add(telefone2);
+
+		funcionario.setTelefones(telefones);
+		assertThat(funcionario.getTelefones().size(), is(2));
+	}
+
+	@Test
+	public void deve_aceitar_telefones_com_o_numero_diferente() {
+		Set<Telefone> telefones = new HashSet<Telefone>();
+		Telefone telefone = new Telefone();
+		telefone.setDdd(TelefoneDDD.DDD11);
+		telefone.setNumero("985191606");
+
+		Telefone telefone2 = new Telefone();
+		telefone2.setDdd(TelefoneDDD.DDD11);
+		telefone2.setNumero("985191617");
+
+		telefones.add(telefone);
+		telefones.add(telefone2);
+
+		funcionario.setTelefones(telefones);
+		assertThat(funcionario.getTelefones().size(), is(2));
+	}
+
+	@Test
 	public void deve_aceitar_email_valido() {
 		funcionario.setEmail("geovane@gmail.com");
 		assertTrue(isValid(funcionario, "O email do funcionario está invalido."));
@@ -346,6 +422,9 @@ public class FuncionarioTest {
 		for (ConstraintViolation<Funcionario> constraintViolation : restricoes)
 			if (constraintViolation.getMessage().equalsIgnoreCase(mensagem))
 				valido = false;
+		for (ConstraintViolation<Funcionario> constraintViolation : restricoes) {
+			System.out.println(constraintViolation.getMessage());
+		}
 		return valido;
 	}
 
