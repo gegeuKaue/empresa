@@ -1,5 +1,6 @@
 package br.com.contmatic.empresa;
 
+import static com.google.code.beanmatchers.BeanMatchers.hasValidBeanConstructor;
 import static com.google.code.beanmatchers.BeanMatchers.hasValidBeanEqualsFor;
 import static com.google.code.beanmatchers.BeanMatchers.hasValidBeanHashCodeFor;
 import static com.google.code.beanmatchers.BeanMatchers.hasValidGettersAndSetters;
@@ -58,6 +59,11 @@ public class FuncionarioTest {
 	@Test
 	public void deve_respeitar_hash_code() {
 		assertThat(CLASSE, hasValidBeanHashCodeFor("cpf"));
+	}
+
+	@Test
+	public void deve_respeitar_construtor() {
+		assertThat(CLASSE, hasValidBeanConstructor());
 	}
 
 	@Test

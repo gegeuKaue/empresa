@@ -1,5 +1,6 @@
 package br.com.contmatic.endereco;
 
+import static com.google.code.beanmatchers.BeanMatchers.hasValidBeanConstructor;
 import static com.google.code.beanmatchers.BeanMatchers.hasValidGettersAndSetters;
 import static org.hamcrest.CoreMatchers.containsString;
 import static org.hamcrest.CoreMatchers.is;
@@ -40,6 +41,11 @@ public class CidadeTest {
 	@Before
 	public void init() {
 		this.cidade = Fixture.from(CLASSE).gimme("cidade");
+	}
+
+	@Test
+	public void deve_respeitar_construtor() {
+		assertThat(CLASSE, hasValidBeanConstructor());
 	}
 
 	@Test

@@ -1,5 +1,6 @@
 package br.com.contmatic.endereco;
 
+import static com.google.code.beanmatchers.BeanMatchers.hasValidBeanConstructor;
 import static com.google.code.beanmatchers.BeanMatchers.hasValidGettersAndSetters;
 import static org.hamcrest.CoreMatchers.containsString;
 import static org.junit.Assert.assertFalse;
@@ -41,6 +42,11 @@ public class EnderecoTest {
 	@Test
 	public void deve_respeitar_os_get_set() {
 		assertThat(CLASSE, hasValidGettersAndSetters());
+	}
+
+	@Test
+	public void deve_respeitar_construtor() {
+		assertThat(CLASSE, hasValidBeanConstructor());
 	}
 
 	@Test

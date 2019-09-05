@@ -18,14 +18,15 @@ public class EstadoTest {
 		Estado estado = Estado.valueOf("SP");
 		assertTrue(estado.getNomeEstado().equalsIgnoreCase("São Paulo"));
 	}
-	
+
 	@Test
 	public void deve_conter_o_valor_nome_no_toString() {
 		assertThat(Estado.SP.toString(), containsString("nomeEstado"));
 	}
-	
+
 	@Test
 	public void deve_conter_o_valor_sigla_no_toString() {
 		assertThat(Estado.SP.toString(), containsString("name"));
 	}
+
 }
