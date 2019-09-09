@@ -31,13 +31,13 @@ public class Cidade {
 	@NotNull(message = "O Bairro da cidade não pode está vazio")
 	@Size.List({ @Size(min = 1, message = "O bairro da cidade não deve ser vazio"),
 			@Size(max = 500, message = "O bairro limite da bairro da cidade é de {max}") })
-	private List<String> bairro;
+	private List<Bairro> bairro;
 
-	public List<String> getBairro() {
+	public List<Bairro> getBairro() {
 		return bairro;
 	}
 
-	public void setBairro(List<String> bairro) {
+	public void setBairro(List<Bairro> bairro) {
 		this.bairro = bairro;
 	}
 

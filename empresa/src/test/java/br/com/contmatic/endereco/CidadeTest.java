@@ -89,9 +89,11 @@ public class CidadeTest {
 
 	@Test
 	public void nao_deve_aceitar_lista_de_bairro_com_mais_500_bairro() {
-		List<String> bairros = new ArrayList<String>();
+		List<Bairro> bairros = new ArrayList<Bairro>();
+		Bairro bairro = new Bairro();
 		for (int i = 0; i < 533; i++) {
-			bairros.add("Res. Flamboyant");
+			bairro.setBairro("Res. Flamboyant");
+			bairros.add(bairro);
 		}
 		cidade.setBairro(bairros);
 		assertFalse(isValid(cidade, "O bairro limite da bairro da cidade é de 500"));
@@ -123,16 +125,21 @@ public class CidadeTest {
 
 	@Test
 	public void deve_aceitar_bairros() {
-		List<String> bairros = new ArrayList<String>();
-		bairros.add("Rua Sabará");
-		bairros.add("Rua Orlando Silva");
+		List<Bairro> bairros = new ArrayList<Bairro>();
+
+		Bairro bairro = new Bairro();
+		bairro.setBairro("Rua Sabará");
+		bairros.add(bairro);
+
+		Bairro bairro2 = new Bairro();
+		bairros.add(bairro2);
 		cidade.setBairro(bairros);
 		assertThat(cidade.getBairro().size(), is(2));
 	}
 
 	@Test
 	public void nao_deve_aceitar_bairro_vazia() {
-		cidade.setBairro(new ArrayList<String>());
+		cidade.setBairro(new ArrayList<Bairro>());
 		assertTrue(isValid(cidade, "O Bairro da cidade não pode está vazios"));
 	}
 
