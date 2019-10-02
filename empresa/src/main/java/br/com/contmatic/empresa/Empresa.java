@@ -44,6 +44,7 @@ public class Empresa {
 	private String email;
 
 	/** The cnpj. */
+
 	@NotBlank(message = "O cnpj não pode ser nulo")
 	@CNPJ(message = "O CNPJ da empresa está invalido")
 	private String cnpj;
@@ -240,4 +241,5 @@ public class Empresa {
 	public String toString() {
 		return ToStringBuilder.reflectionToString(this, JSON_STYLE);
 	}
+
 }

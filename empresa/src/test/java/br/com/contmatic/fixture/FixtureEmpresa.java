@@ -3,6 +3,7 @@ package br.com.contmatic.fixture;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
+import java.util.Random;
 import java.util.Set;
 
 import br.com.contmatic.empresa.Empresa;
@@ -16,7 +17,8 @@ public class FixtureEmpresa {
 	public static void fixture() {
 		Fixture.of(Empresa.class).addTemplate("empresa", new Rule() {
 			{
-				add("nome", random("contmatic", "cont"));
+
+				add("nome", regex("\\w{" + (new Random().nextInt(10) + 10) + "}"));
 				add("email", "${nome}@gmail.com");
 				add("cnpj", random("78434004000175", "41285742000198", "52643314000106", "80861671000186"));
 				FixtureEndereco.fixture();
@@ -31,6 +33,11 @@ public class FixtureEmpresa {
 				funcionarios.add((Funcionario) Fixture.from(Funcionario.class).gimme("funcionario"));
 				funcionarios.add((Funcionario) Fixture.from(Funcionario.class).gimme("funcionario"));
 				funcionarios.add((Funcionario) Fixture.from(Funcionario.class).gimme("funcionario"));
+				funcionarios.add((Funcionario) Fixture.from(Funcionario.class).gimme("funcionario"));
+				funcionarios.add((Funcionario) Fixture.from(Funcionario.class).gimme("funcionario"));
+				funcionarios.add((Funcionario) Fixture.from(Funcionario.class).gimme("funcionario"));
+				funcionarios.add((Funcionario) Fixture.from(Funcionario.class).gimme("funcionario"));
+
 				Set<Telefone> telefones = new HashSet<Telefone>();
 				FixtureTelefone.fixture();
 
@@ -45,4 +52,10 @@ public class FixtureEmpresa {
 		});
 	}
 
+	public static void main(String[] args) {
+		fixture();
+		System.out.println("sss");
+		Empresa empresa = Fixture.from(Empresa.class).gimme("empresa");
+		System.out.println(empresa);
+	}
 }
